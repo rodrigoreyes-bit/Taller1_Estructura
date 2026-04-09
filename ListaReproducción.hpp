@@ -1,0 +1,16 @@
+//
+// Created by Rodrigo on 4/9/2026.
+//
+
+#ifndef TALLER1_ESTRUCTURA_LISTAREPRODUCCIÓN_HPP
+#define TALLER1_ESTRUCTURA_LISTAREPRODUCCIÓN_HPP
+
+
+
+class ListaReproducción {
+
+};
+
+
+
+#endif //TALLER1_ESTRUCTURA_LISTAREPRODUCCIÓN_HPP

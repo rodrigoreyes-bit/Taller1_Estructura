@@ -1,6 +1,6 @@
 #include "Cancion.hpp"
 
-Cancion::Cancion(int id, string nombre, string artista, string album, int anio, int duracion, string ubicacion) {
+Cancion::Cancion(int id, string nombre, string artista, string album, int ano, int duracion, string ubicacion) {
 }
 
 Cancion::Cancion() {

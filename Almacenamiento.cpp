@@ -4,22 +4,28 @@
 #include <string>
 using namespace std;
 
-Almacenamiento::Almacenamiento() {}
-//
-vector<Cancion> Almacenamiento::getListaCanciones() {
+Almacenamiento::Almacenamiento() {
 }
-//hola :3
-void Almacenamiento::crearCanción(string id, string nombre, string artista, string album, int duracion) {
-    Cancion *c = new Cancion(id, nombre, artista, album, duracion);
 
+void Almacenamiento::crearCanción(int id, string nombre, string artista, string album, int ano, int duracion,
+                                  string ubicacion) {
+    Cancion *c = new Cancion(id, nombre, artista, album, ano, duracion, ubicacion);
+
+    Nodo* cursor = str;
+
+    if (!str->dato->getNombre().empty()) {
+        str->dato = c;
+    }else {
+
+        while (cursor != nullptr) {
+            if (cursor->siguiente == nullptr) {
+                cursor->siguiente->dato = c;
+            }
+
+        }
+
+    }
 }
 
 void Almacenamiento::mostrarListaCanciones() {
 }
-
-
-
-
-
-
-

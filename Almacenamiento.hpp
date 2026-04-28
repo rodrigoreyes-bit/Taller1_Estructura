@@ -1,7 +1,6 @@
 #ifndef TALLER1_ESTRUCTURA_ALMACENAMIENTO_HPP
 #define TALLER1_ESTRUCTURA_ALMACENAMIENTO_HPP
 #include <string>
-#include <vector>
 #include "ListaReproducción.hpp"
 #include "Cancion.hpp"
 
@@ -10,14 +9,14 @@ using namespace std;
 
 class Almacenamiento {
 private:
-
+    Nodo* str = nullptr;
 
 public:
     Almacenamiento(); //Constructor
-    vector<Cancion> getListaCanciones();
+    void crearCanción(int id, string nombre, string artista, string album, int ano, int duracion, string ubicacion);
 
-    void crearCanción(string id, string nombre, string artista, string album, int duracion);
     void mostrarListaCanciones();
+
 };
 
 

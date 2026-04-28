@@ -20,7 +20,7 @@ private:
 
 public:
     Cancion(int id, string nombre, string artista, string album,
-            int anio, int duracion, string ubicacion);
+            int ano, int duracion, string ubicacion);
 
     Cancion();
 

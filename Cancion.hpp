@@ -2,8 +2,10 @@
 // Created by Rodrigo on 4/27/2026.
 //
 
+#ifndef TALLER1_ESTRUCTURA_CANCION_HPP
+#define TALLER1_ESTRUCTURA_CANCION_HPP
 #include <string>
-#include <iostream>
+
 using namespace std;
 
 class Cancion {
@@ -17,15 +19,17 @@ private:
     string ubicacion;
 
 public:
-    Cancion();
-    Cancion(int id, std::string nombre, std::string artista, std::string album,
-            int anio, int duracion, std::string ubicacion);
+    Cancion(int id, string nombre, string artista, string album,
+            int ano, int duracion, string ubicacion);
 
-    int getId();
-    string getNombre();
-    string getArtista();
-    string getAlbum();
-    int getAnio();
-    int getDuracion();
-    string getUbicacion();
+    Cancion();
+
+    int getId() const;
+
+    string getNombre() const;
+
+    string getArtista() const;
 };
+
+
+#endif //TALLER1_ESTRUCTURA_CANCION_HPP

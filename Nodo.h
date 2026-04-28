@@ -1,3 +1,5 @@
+#include <iostream>
+#include "Cancion.hpp"
 using namespace std;
 
 class Nodo {

@@ -1,5 +1,6 @@
 #ifndef TALLER1_ESTRUCTURA_ALMACENAMIENTO_HPP
 #define TALLER1_ESTRUCTURA_ALMACENAMIENTO_HPP
+#include <iostream>
 #include <string>
 #include <vector>
 #include "ListaReproducción.hpp"

@@ -15,6 +15,7 @@ void Almacenamiento::crearCanción(int id, string nombre, string artista, string
 
     if (!str->dato->getNombre().empty()) {
         str->dato = c;
+        //datos
     }else {
 
         while (cursor != nullptr) {

@@ -8,4 +8,6 @@ add_executable(Taller1_Estructura main.cpp
         Almacenamiento.hpp
         ListaReproducción.cpp
         ListaReproducción.hpp
+        Cancion.cpp
+        Cancion.hpp
 )

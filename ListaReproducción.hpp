@@ -12,7 +12,7 @@
 struct Nodo {
     Nodo *siguiente;
     Nodo *anterior;
-    Canción *cancion;
+    Cancion *cancion;
 };
 
 class ListaReproducción {

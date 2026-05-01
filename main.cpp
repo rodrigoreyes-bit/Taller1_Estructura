@@ -2,8 +2,11 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "Almacenamiento.hpp"
 
 using namespace std;
+
+Almacenamiento* a = new Almacenamiento();
 
 void lecturaCanciones() {
     ifstream archivo("music_source.txt");
@@ -38,6 +41,10 @@ void lecturaCanciones() {
              << "Album: " << album << " [" << anio << "] | "
              << "Duracion: " << duracion << "s | "
              << "Ruta: " << ubicacion << endl;
+        //int id, string nombre, string artista, string album, int ano, int duracion,
+        //string ubicacion
+        //a->crearCanción(stoi(id), nombre, artista, album,stoi(anio),stoi(duracion),ubicacion);
+
     }
 
     archivo.close();

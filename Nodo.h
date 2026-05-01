@@ -1,14 +1,12 @@
-#include <string>
+#ifndef NODO_H
+#define NODO_H
 #include "Cancion.hpp"
-using namespace std;
-
 
 class Nodo {
-    public:
-        Cancion* dato;
-        Nodo* siguiente;
-        Nodo* anterior;
-
-        Nodo(Cancion* cancion);
+public:
+    Cancion* dato;
+    Nodo* siguiente;
+    Nodo* anterior;
+    Nodo(Cancion* cancion);
 };
-
+#endif

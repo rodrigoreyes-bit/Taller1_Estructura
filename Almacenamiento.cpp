@@ -5,7 +5,7 @@ Almacenamiento::Almacenamiento() {
     this->str = nullptr;
 }
 
-void Almacenamiento::crearCancion(int id, string nombre, string artista, string album, int ano, int duracion, string ubicacion) {
+void Almacenamiento::crearCanción(int id, string nombre, string artista, string album, int ano, int duracion, string ubicacion) {
     Cancion *nuevaCancion = new Cancion(id, nombre, artista, album, ano, duracion, ubicacion);
     Nodo *nuevoNodo = new Nodo(nuevaCancion);
 
@@ -18,6 +18,7 @@ void Almacenamiento::crearCancion(int id, string nombre, string artista, string 
         }
         cursor->siguiente = nuevoNodo;
         nuevoNodo->anterior = cursor;
+    }
 }
 
 void Almacenamiento::mostrarListaCanciones() {

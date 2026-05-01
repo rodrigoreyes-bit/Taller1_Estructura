@@ -2,8 +2,8 @@
 // Created by Rodrigo on 4/9/2026.
 //
 
-#ifndef TALLER1_ESTRUCTURA_LISTAREPRODUCCIÓN_HPP
-#define TALLER1_ESTRUCTURA_LISTAREPRODUCCIÓN_HPP
+#ifndef TALLER1_ESTRUCTURA_LISTAREPRODUCCION_HPP
+#define TALLER1_ESTRUCTURA_LISTAREPRODUCCION_HPP
 #include "Almacenamiento.hpp"
 #include "Nodo.h"
 
@@ -11,7 +11,7 @@
 //deseadas de manera privada
 
 
-class ListaReproducción {
+class ListaReproduccion {
 private:
     Nodo *inicio;
     string estadoReproduccion;
@@ -19,7 +19,7 @@ private:
     string estadoRepeticion;
 
 public:
-    ListaReproducción();
+    ListaReproduccion();
 
     void cambiarEstado();
 

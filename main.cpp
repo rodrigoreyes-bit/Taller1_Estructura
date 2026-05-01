@@ -31,6 +31,7 @@ void lecturaCanciones(Almacenamiento* a) {
         try {
             a->crearCanción(stoi(id), nombre, artista, album, stoi(anio), stoi(duracion), ubicacion);
         } catch (...) {
+            //Se me olvido como hacer este catch dhsjhd
         }
     }
     archivo.close();

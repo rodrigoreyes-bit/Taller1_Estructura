@@ -1,14 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include "Almacenamiento.hpp"
 
 using namespace std;
 
-Almacenamiento* a = new Almacenamiento();
-
-void lecturaCanciones() {
+void lecturaCanciones(Almacenamiento* a) {
     ifstream archivo("music_source.txt");
     string linea;
 
@@ -16,9 +13,6 @@ void lecturaCanciones() {
         cout << "Error: No se encontro music_source.txt" << endl;
         return;
     }
-    //hola
-
-    cout << "--- Contenido del archivo music_source.txt ---" << endl;
 
     while (getline(archivo, linea)) {
         if (linea.empty()) continue;
@@ -32,25 +26,19 @@ void lecturaCanciones() {
         getline(ss, album, ',');
         getline(ss, anio, ',');
         getline(ss, duracion, ',');
-        getline(ss, ubicacion, ',');
+        getline(ss, ubicacion);
 
-        // ESTO ES PARA VER SI LEE EL ARCH !!!!!!!!!!!!!!!!
-        cout << "ID: " << id << " | "
-             << "Cancion: " << nombre << " | "
-             << "Artista: " << artista << " | "
-             << "Album: " << album << " [" << anio << "] | "
-             << "Duracion: " << duracion << "s | "
-             << "Ruta: " << ubicacion << endl;
-        //int id, string nombre, string artista, string album, int ano, int duracion,
-        //string ubicacion
-        //a->crearCanción(stoi(id), nombre, artista, album,stoi(anio),stoi(duracion),ubicacion);
-
+        try {
+            a->crearCanción(stoi(id), nombre, artista, album, stoi(anio), stoi(duracion), ubicacion);
+        } catch (...) {
+        }
     }
-
     archivo.close();
 }
 
 int main() {
-    lecturaCanciones();
+    Almacenamiento* a = new Almacenamiento();
+    lecturaCanciones(a);
+    a->mostrarListaCanciones();
     return 0;
 }

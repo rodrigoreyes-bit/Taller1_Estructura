@@ -61,6 +61,9 @@ void clearScreen() {
     system("cls");
 }
 
+void pausaPlay() {
+    
+}
 
 
 int main() {
@@ -120,7 +123,7 @@ int main() {
     delete a;
     return 0;
     return 0;
+    }
 
 
 
-}

@@ -11,4 +11,5 @@ add_executable(Taller1_Estructura main.cpp
         Nodo.cpp
         Nodo.h
         Cancion.cpp
+        Configuracion.hpp
 )

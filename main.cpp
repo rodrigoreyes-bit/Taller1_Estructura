@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 #include "Almacenamiento.hpp"
 
 using namespace std;
@@ -55,6 +56,13 @@ void menuOpciones(string estado, string modo, string cancion, string artista, st
     cout << "  X - Salir" << endl;
     cout << "Ingrese Opcion: ";
 }
+
+void clearScreen() {
+    system("cls");
+}
+
+
+
 int main() {
     Almacenamiento* a = new Almacenamiento();
     lecturaCanciones(a);
@@ -112,4 +120,7 @@ int main() {
     delete a;
     return 0;
     return 0;
+
+
+
 }

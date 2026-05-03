@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
+#include <string>
 #include "../include/classes/Almacenamiento.hpp"
 #include "../include/data_structures/ListaReproduccion.hpp"
 
@@ -32,17 +33,14 @@ void lecturaCanciones(Almacenamiento* a) {
 
         try {
             a->crearCanción(stoi(id), nombre, artista, album, stoi(anio), stoi(duracion), ubicacion);
-        } catch (...) {
-            //Se me olvido como hacer este catch dhsjhd
+        } catch (const std::exception& e) {
+            cout << "Error leyendo linea del archivo" << endl;
         }
     }
     archivo.close();
 }
-//LOS ARGUMENTOS DE ESTA FUNCIÓN SON TEMPORALES, lo hice asi porque una no he terminado la parte de la lista de reproducción,
-//Hay que crear una instancia de lista de reproducción y asigarle el estado actual del reproductor, y en base a esa instancia
-//sacar los argumentos de la función
-void menuOpciones(string estado, string modo, string cancion, string artista, string album, int anio) {
 
+void menuOpciones(string estado, string modo, string cancion, string artista, string album, int anio) {
     cout << estado << " (" << modo << "): " << cancion << endl;
     cout << "Artista: " << artista << endl;
     cout << "Album: " << album << " [" << anio << "]" << endl;
@@ -66,89 +64,177 @@ void clearScreen() {
 #    endif
 }
 
-void pausaPlay() {
+void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAct, string& artistaAct, string& albumAct, int& anioAct) {
+    string input;
+    bool volver = false;
 
+    while (volver == false) {
+        clearScreen();
+
+        Nodo* cursor = alm->getPrimerNodo();
+        int i = 1;
+
+        if (cursor == nullptr) {
+            cout << "El registro esta vacio" << endl;
+        }
+
+        while (cursor != nullptr) {
+            cout << i << ". " << cursor->dato->getNombre() << " - " << cursor->dato->getArtista() << endl;
+            cursor = cursor->siguiente;
+            i++;
+        }
+
+        cout << "  Opciones:" << endl;
+        cout << "  R<num> - Reproducir cancion seleccionada (ej: R1)" << endl;
+        cout << "  A<num> - Agregar cancion seleccionada al final de la cola (ej: A3)" << endl;
+        cout << "  N      - Agregar nueva cancion al registro" << endl;
+        cout << "  D<num> - Eliminar cancion seleccionada (ej: D5)" << endl;
+        cout << "  V      - Volver al menu principal" << endl;
+        cout << "Ingrese Opcion: ";
+        cin >> input;
+
+        // Tomar la letra y pasarla a mayúscula
+        char subOpcion = toupper(input[0]);
+        int idx = -1;
+
+        // Si el input tiene más de 1 caracter
+        if (input.length() > 1) {
+            try {
+                idx = stoi(input.substr(1));
+            } catch (...) {
+                cout << "Formato no valido." << endl;
+                continue;
+            }
+        }
+
+        if (subOpcion == 'V') {
+            volver = true;
+        }
+        else if (subOpcion == 'R' && idx != -1) {
+            Cancion* elegida = alm->getCancionIndice(idx);
+            if (elegida != nullptr) {
+                cancionAct = elegida->getNombre();
+                artistaAct = elegida->getArtista();
+                albumAct = elegida->getAlbum();
+                anioAct = elegida->getAnio();
+                cout << "Reproduciendo ahora: " << cancionAct << endl;
+            } else {
+                cout << "Indice no encontrado en la lista." << endl;
+            }
+        }
+        else if (subOpcion == 'A' && idx != -1) {
+            Cancion* elegida = alm->getCancionIndice(idx);
+            if (elegida != nullptr) {
+                lr->agregarAlFinal(elegida);
+                cout << "Cancion agregada a la lista de reproduccion actual: " << elegida->getNombre() << endl;
+            } else {
+                cout << "Indice no encontrado" << endl;
+            }
+        }
+        else if (subOpcion == 'N') {
+            string nom, art, alb, ubi;
+            int id, an, dur;
+            bool idValido = false;
+
+            while (idValido == false) {
+                cout << "Ingrese ID interno: "; cin >> id;
+                if (alm->existeID(id) == true) {
+                    cout << "Error: El ID " << id << " ya existe. Intente con otro." << endl;
+                } else {
+                    idValido = true;
+                }
+            }
+
+            cout << "Nombre de la cancion: "; cin.ignore(); getline(cin, nom);
+            cout << "Artista: "; getline(cin, art);
+            cout << "Album: "; getline(cin, alb);
+            cout << "Anio: "; cin >> an;
+            cout << "Duracion (segundos): "; cin >> dur;
+            cout << "Ubicacion del archivo: "; cin.ignore(); getline(cin, ubi);
+
+            alm->crearCanción(id, nom, art, alb, an, dur, ubi);
+            alm->guardarEnArchivo();
+            cout << "Cancion registrada correctamente y guardada en music_source.txt" << endl;
+        }
+        else if (subOpcion == 'D' && idx != -1) {
+            Cancion* elegida = alm->getCancionIndice(idx);
+            if (elegida != nullptr) {
+                alm->eliminarCancion(elegida->getId());
+                alm->guardarEnArchivo();
+                cout << "Cancion eliminada del registro y del archivo." << endl;
+            } else {
+                cout << "Indice no encontrado en la lista." << endl;
+            }
+        } else {
+            cout << "Opcion no valida o falta el numero (ej: R1, A2, D3)." << endl;
+        }
+    }
 }
+// ==============================================================================
 
 
 int main() {
     Almacenamiento* listaAlmacenamiento = new Almacenamiento();
-
     lecturaCanciones(listaAlmacenamiento);
-    listaAlmacenamiento->mostrarListaCanciones();
+
     char opcion;
     bool salir = false;
 
     ListaReproduccion* lista = new ListaReproduccion();
 
-    // Por mientras no tenemos cfg !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    string estadoActual = "Reproduciendo";
-    string modoActual = "S-R1";
-    string cancionActual = "Fire Dance :,v";
-    string artistaActual = "Vivid BAD Squad";
-    string albumActual = "Fire Dance (Single)";
-    int anioActual = 2025;
+    string estadoActual = "Detenido";
+    string modoActual = "";
+    string cancionActual = "Ninguna";
+    string artistaActual = "Desconocido";
+    string albumActual = "Ninguno";
+    int anioActual = 0;
 
-    while (!salir) {
+    while (salir == false) {
         clearScreen();
-
         menuOpciones(estadoActual, modoActual, cancionActual, artistaActual, albumActual, anioActual);
 
         cin >> opcion;
-        //Pasa el input a mayusculas porsiaca
         opcion = toupper(opcion);
 
         switch (opcion) {
-
             case 'W':
-            // pausa/play
-            break;
-
+                // pausa/play
+                break;
             case 'Q':
-            // anterior
-            break;
-
+                // anterior
+                break;
             case 'E':
-            // siguiente
-            break;
-
+                // siguiente
+                break;
             case 'S':
-            // aleatorio
-            break;
-
+                // aleatorio
+                break;
             case 'R':
-            // ciclo de repetición
-            break;
-
+                // ciclo de repetición
+                break;
             case 'A': {
-            string input;
+                string input;
+                do {
+                    clearScreen();
+                    lista->mostrarListaReproduccion();
+                    cin >> input;
 
-            do {
-                clearScreen();
-                lista->mostrarListaReproduccion();
-
-                cin >> input;
-
-                if (input.size() > 1 && input[0] == 'S') {
-                    int num = stoi(input.substr(1));
-                    lista->saltarACancion(num);
-                    break;
-                }
-            } while (input != "V");
+                    if (input.size() > 1 && toupper(input[0]) == 'S') {
+                        int num = stoi(input.substr(1));
+                        lista->saltarACancion(num);
+                        break;
+                    }
+                } while (toupper(input[0]) != 'V');
                 break;
             }
-
             case 'L':
-                // catálogo completo
+                ejecutarmenuL(listaAlmacenamiento, lista, cancionActual, artistaActual, albumActual, anioActual);
                 break;
-
             case 'X':
-                //LOGICA PARA GUARDAR ESTADOOOO
+                // LOGICA PARA GUARDAR ESTADOOOO
                 salir = true;
                 break;
-
             default:
-                //HAY QUE HACER LA LOGICA POR SI SE CAE EL SISTEMA
                 cout << "Opcion no valida. Intente de nuevo." << endl;
                 break;
         }
@@ -158,6 +244,3 @@ int main() {
     delete lista;
     return 0;
 }
-
-
-

@@ -39,11 +39,17 @@ void Almacenamiento::mostrarListaCanciones() {
 Cancion* Almacenamiento::getCancionIndice(int indice) {
     Nodo* aux = str;
     int cont = 1;
+
     while (aux != nullptr && cont < indice) {
         aux = aux->siguiente;
         cont++;
     }
-    return (aux != nullptr) ? aux->dato : nullptr;
+
+    if (aux != nullptr) {
+        return aux->dato;
+    } else {
+        return nullptr;
+    }
 }
 
 void Almacenamiento::eliminarCancion(int id) {
@@ -60,6 +66,35 @@ void Almacenamiento::eliminarCancion(int id) {
         }
         aux = aux->siguiente;
     }
+}
+bool Almacenamiento::existeID(int id) {
+    Nodo* aux = str;
+    while (aux != nullptr) {
+        if (aux->dato->getId() == id) {
+            return true;
+        }
+        aux = aux->siguiente;
+    }
+    return false;
+}
+void Almacenamiento::guardarEnArchivo() {
+    //borra el archivo original
+    ofstream archivo("music_source.txt", ios::trunc);
+    if (!archivo.is_open()) return;
+
+    Nodo* aux = str;
+    while (aux != nullptr) {
+        Cancion* c = aux->dato;
+        archivo << c->getId() << ","
+                << c->getNombre() << ","
+                << c->getArtista() << ","
+                << c->getAlbum() << ","
+                << c->getAnio() << ","
+                << c->getDuracion() << ","
+                << c->getUbicacion() << endl;
+        aux = aux->siguiente;
+    }
+    archivo.close();
 }
 
 

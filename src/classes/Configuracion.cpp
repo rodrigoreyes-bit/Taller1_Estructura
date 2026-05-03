@@ -23,16 +23,27 @@ void Configuracion::cargarArchivoConfig() {
     }
 
     std::string variable;
+    int val;
 
     while (arch >> variable) {
         if (variable == "idCancionActual") {
             arch >> this->idCancionActual;
         }
         else if (variable == "estaPausado") {
-            arch >> this->estaPausado;
+            arch >> val;
+            if (val ==1) {
+                this->estaPausado = true;
+            }else {
+                this->estaPausado = false;
+            }
         }
         else if (variable == "modoAleatorio") {
-            arch >> this->modoAleatorio;
+            arch >> val;
+            if (val==1) {
+                this->modoAleatorio = true;
+            }else {
+                this->modoAleatorio = false;
+            }
         }
         else if (variable == "repeticion") {
             arch >> this->repeticion;
@@ -48,8 +59,39 @@ void Configuracion::cargarArchivoConfig() {
 }
 
 void Configuracion::sobreescribirArchivoConfig() {
+    std:: ofstream arch("status.cfg");
+    if (!arch.is_open()) {
+        std::cout << "No se encontró archivo status.cfg" << std::endl;
+        return;
+    }
 
+    arch << "idCancionActual " << this->idCancionActual << "\n";
+    arch << "estaPausado ";
+    if (this->estaPausado == true) {
+        arch << 1;
+    }else {
+        arch << 0;
+    }
+    arch << "\n";
 
+    arch << "modoAleatorio ";
+    if (this->modoAleatorio== true) {
+        arch << 1;
+    }else {
+        arch << 0;
+    }
+    arch << "\n";
+
+    arch << "repeticion " << this->repeticion << "\n";
+    arch << "cancionesPendientes ";
+    nodoID* aux = listaPendientes;
+    while (aux != nullptr) {
+        arch << " " << aux->id;
+        aux = aux->sig;
+    }
+    arch << "\n";
+
+    arch.close();
 }
 
 

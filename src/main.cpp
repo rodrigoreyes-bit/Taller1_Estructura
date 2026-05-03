@@ -5,6 +5,7 @@
 #include <string>
 #include "../include/classes/Almacenamiento.hpp"
 #include "../include/data_structures/ListaReproduccion.hpp"
+#include "classes/Configuracion.hpp"
 
 using namespace std;
 
@@ -174,6 +175,10 @@ void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAc
 
 
 int main() {
+
+    Configuracion* config1 = new Configuracion();
+    config1 ->cargarArchivoConfig();
+
     Almacenamiento* listaAlmacenamiento = new Almacenamiento();
     lecturaCanciones(listaAlmacenamiento);
 

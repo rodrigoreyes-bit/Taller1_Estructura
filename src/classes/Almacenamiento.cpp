@@ -1,6 +1,7 @@
 #include "../../include/classes/Almacenamiento.hpp"
 #include <iostream>
-
+#include <fstream>
+#include <sstream>
 Almacenamiento::Almacenamiento() {
     this->str = nullptr;
 }
@@ -35,5 +36,31 @@ void Almacenamiento::mostrarListaCanciones() {
     }
     cout << endl;
 }
+Cancion* Almacenamiento::getCancionIndice(int indice) {
+    Nodo* aux = str;
+    int cont = 1;
+    while (aux != nullptr && cont < indice) {
+        aux = aux->siguiente;
+        cont++;
+    }
+    return (aux != nullptr) ? aux->dato : nullptr;
+}
+
+void Almacenamiento::eliminarCancion(int id) {
+    Nodo* aux = str;
+    while (aux != nullptr) {
+        if (aux->dato->getId() == id) {
+            if (aux->anterior) aux->anterior->siguiente = aux->siguiente;
+            else str = aux->siguiente;
+            if (aux->siguiente) aux->siguiente->anterior = aux->anterior;
+
+            delete aux->dato;
+            delete aux;
+            return;
+        }
+        aux = aux->siguiente;
+    }
+}
+
 
 

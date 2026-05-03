@@ -77,7 +77,7 @@ int main() {
     char opcion;
     bool salir = false;
 
-    ListaReproduccion* lista = new ListaReproduccion(listaAlmacenamiento);
+    ListaReproduccion* lista = new ListaReproduccion();
 
     // Por mientras no tenemos cfg !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     string estadoActual = "Reproduciendo";

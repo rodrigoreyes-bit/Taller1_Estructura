@@ -14,10 +14,9 @@ private:
     string estadoRepeticion;
 
 public:
-    ListaReproduccion(Almacenamiento* lista);
-
+    ListaReproduccion();
+    void agregarAlFinal(Cancion* cancion);
     void cambiarEstado();
-
     void adelantarCancion();
     // Debe tener conocimiento del estado de la repeticion, debe tener un protocolo para eliminar canciones de la lista
     // una vez ya se hayan reproducido, esto excepto a que la instancia de estadoRepeticion sea "Repetir Todas", en ese caso

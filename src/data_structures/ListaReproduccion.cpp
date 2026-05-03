@@ -3,31 +3,25 @@
 #include <iostream>
 using namespace std;
 
-ListaReproduccion::ListaReproduccion(Almacenamiento* lista) {
+ListaReproduccion::ListaReproduccion() {
     this->inicio = nullptr;
-    //VER ESTO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    this->estadoReproduccion = "";
-    this->estadoAleatorio = "";
-    this->estadoRepeticion = "";
+    this->estadoReproduccion = "Detenido";
+    this->estadoAleatorio = "Desactivado";
+    this->estadoRepeticion = "Desactivado";
+}
 
-    Nodo* cursor = lista->str;
-    Nodo* ultimo = nullptr;
-
-    while (cursor != nullptr) {
-        Nodo* nuevo = new Nodo(cursor->dato); // comparte Cancion, pero no Nodo
-
-        if (inicio == nullptr) {
-            inicio = nuevo;
-            ultimo = nuevo;
-        } else {
-            ultimo->siguiente = nuevo;
-            nuevo->anterior = ultimo;
-            ultimo = nuevo;
+void ListaReproduccion::agregarAlFinal(Cancion* cancion) {
+    Nodo* nuevo = new Nodo(cancion);
+    if (inicio == nullptr) {
+        inicio = nuevo;
+    } else {
+        Nodo* aux = inicio;
+        while (aux->siguiente != nullptr) {
+            aux = aux->siguiente;
         }
-
-        cursor = cursor->siguiente;
+        aux->siguiente = nuevo;
+        nuevo->anterior = aux;
     }
-
 }
 
 void ListaReproduccion::mostrarListaReproduccion() {

@@ -10,9 +10,14 @@ using namespace std;
 class Almacenamiento {
 public:
     Nodo* str = nullptr;
+    Nodo* getPrimerNodo() {
+        return str;
+    }
     Almacenamiento();
     void crearCanción(int id, string nombre, string artista, string album, int ano, int duracion, string ubicacion);
-
+    Cancion* getCancionIndice(int indice);
+    void eliminarCancion(int id);
+    int totalCanciones();
     void mostrarListaCanciones();
 };
 

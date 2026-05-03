@@ -19,6 +19,8 @@ public:
     void eliminarCancion(int id);
     int totalCanciones();
     void mostrarListaCanciones();
+    bool existeID(int id);
+    void guardarEnArchivo();
 };
 
 

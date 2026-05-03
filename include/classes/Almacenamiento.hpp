@@ -2,9 +2,9 @@
 #define TALLER1_ESTRUCTURA_ALMACENAMIENTO_HPP
 #include <iostream>
 #include <string>
-#include "ListaReproduccion.hpp"
+#include "../data_structures/ListaReproduccion.hpp"
 #include "Cancion.hpp"
-#include "Nodo.h"
+#include "../data_structures/Nodo.h"
 
 using namespace std;
 

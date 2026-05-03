@@ -1,6 +1,6 @@
 #ifndef NODO_H
 #define NODO_H
-#include "Cancion.hpp"
+#include "../classes/Cancion.hpp"
 
 class Nodo {
 public:

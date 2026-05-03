@@ -1,5 +1,5 @@
 
-#include "Configuracion.hpp"
+#include "../../include/classes/Configuracion.hpp"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -26,7 +26,9 @@ void Configuracion::cargarArchivoConfig() {
 
     std::string variable;
 
-    while (arch >> variable)
+    while (arch >> variable) {
+
+    }
 
 
 }

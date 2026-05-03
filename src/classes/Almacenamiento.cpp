@@ -1,4 +1,4 @@
-#include "Almacenamiento.hpp"
+#include "../../include/classes/Almacenamiento.hpp"
 #include <iostream>
 
 Almacenamiento::Almacenamiento() {

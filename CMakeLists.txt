@@ -3,14 +3,14 @@ project(Taller1_Estructura)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Taller1_Estructura main.cpp
-        Almacenamiento.cpp
-        Almacenamiento.hpp
-        ListaReproduccion.cpp
-        ListaReproduccion.hpp
-        Nodo.cpp
-        Nodo.h
-        Cancion.cpp
-        Configuracion.hpp
-        Configuracion.cpp
+add_executable(Taller1_Estructura
+        src/main.cpp
+
+        src/data_structures/ListaReproduccion.cpp
+        src/data_structures/Nodo.cpp
+
+        src/classes/Almacenamiento.cpp
+        src/classes/Cancion.cpp
+        src/classes/Configuracion.cpp
 )
+target_include_directories(Taller1_Estructura PRIVATE include)

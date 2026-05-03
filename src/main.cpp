@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
-#include "Almacenamiento.hpp"
+#include "../include/classes/Almacenamiento.hpp"
 
 using namespace std;
 

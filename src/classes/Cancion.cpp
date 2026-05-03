@@ -1,4 +1,4 @@
-#include "Cancion.hpp"
+#include "classes/Cancion.hpp"
 
 Cancion::Cancion(int id, string nombre, string artista, string album, int ano, int duracion, string ubicacion) {
     this->id = id;

@@ -4,7 +4,7 @@
 
 #ifndef TALLER1_ESTRUCTURA_LISTAREPRODUCCION_HPP
 #define TALLER1_ESTRUCTURA_LISTAREPRODUCCION_HPP
-#include "Almacenamiento.hpp"
+#include "../classes/Almacenamiento.hpp"
 #include "Nodo.h"
 
 //Implementar listas entrelazadas en la lista de reproducción. Hacer struct de nodos con istancia de las canciones

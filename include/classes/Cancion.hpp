@@ -1,6 +1,3 @@
-//
-// Created by Rodrigo on 4/27/2026.
-//
 
 #ifndef TALLER1_ESTRUCTURA_CANCION_HPP
 #define TALLER1_ESTRUCTURA_CANCION_HPP

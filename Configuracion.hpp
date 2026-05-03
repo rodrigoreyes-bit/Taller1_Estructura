@@ -1,6 +1,4 @@
-//
-// Created by pc on 02-05-2026.
-//
+
 
 #ifndef TALLER1_ESTRUCTURA_CONFIGURACION_HPP
 #define TALLER1_ESTRUCTURA_CONFIGURACION_HPP
@@ -8,17 +6,23 @@
 
 struct nodoID {
     int id;
-    nodoId* sig;
+    nodoID* sig;
 };
 
 
 class Configuracion {
-private:
-    int idCancionActual;
-    bool estaPausado;
-    bool modoAleatorio;
-    int repeticion;
-    nodoID* listaPendientes;
+    private:
+        int idCancionActual;
+        bool estaPausado;
+        bool modoAleatorio;
+        int repeticion;
+        nodoID* listaPendientes;
+
+
+    public:
+        Configuracion();
+        void cargarArchivoConfig();
+        void sobreescribirArchivoConfig();
 
 
 };

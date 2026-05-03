@@ -57,9 +57,11 @@ void menuOpciones(string estado, string modo, string cancion, string artista, st
 }
 
 void clearScreen() {
-    for (int i = 0; i < 50; i++) {
-        cout << endl;
-    }
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#    endif
 }
 
 void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAct, string& artistaAct, string& albumAct, int& anioAct) {

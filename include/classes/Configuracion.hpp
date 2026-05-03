@@ -23,6 +23,7 @@ class Configuracion {
         Configuracion();
         void cargarArchivoConfig();
         void sobreescribirArchivoConfig();
+        void insertarIdPendientes(int id);
 
 
 };

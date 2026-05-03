@@ -3,6 +3,7 @@
 #include <sstream>
 #include <cstdlib>
 #include "../include/classes/Almacenamiento.hpp"
+#include "../include/data_structures/ListaReproduccion.hpp"
 
 using namespace std;
 
@@ -58,61 +59,92 @@ void menuOpciones(string estado, string modo, string cancion, string artista, st
 }
 
 void clearScreen() {
-    system("cls");
+    for (int i = 0; i < 50; i++) {
+        cout << endl;
+    }
 }
 
 void pausaPlay() {
-    
+
 }
 
 
 int main() {
-    Almacenamiento* a = new Almacenamiento();
-    lecturaCanciones(a);
-    a->mostrarListaCanciones();
+    Almacenamiento* listaAlmacenamiento = new Almacenamiento();
+
+    lecturaCanciones(listaAlmacenamiento);
+    listaAlmacenamiento->mostrarListaCanciones();
     char opcion;
     bool salir = false;
 
-    // Por mientras no tenemos cfg
+    ListaReproduccion* lista = new ListaReproduccion(listaAlmacenamiento);
+
+    // Por mientras no tenemos cfg !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     string estadoActual = "Reproduciendo";
     string modoActual = "S-R1";
-    string cancionActual = "Fire Dance";
+    string cancionActual = "Fire Dance :,v";
     string artistaActual = "Vivid BAD Squad";
     string albumActual = "Fire Dance (Single)";
     int anioActual = 2025;
 
     while (!salir) {
+        clearScreen();
+
         menuOpciones(estadoActual, modoActual, cancionActual, artistaActual, albumActual, anioActual);
+
         cin >> opcion;
         //Pasa el input a mayusculas porsiaca
         opcion = toupper(opcion);
 
         switch (opcion) {
+
             case 'W':
-                // pausa/play
-                break;
+            // pausa/play
+            break;
+
             case 'Q':
-                // anterior
-                break;
+            // anterior
+            break;
+
             case 'E':
-                // siguiente
-                break;
+            // siguiente
+            break;
+
             case 'S':
-                // aleatorio
-                break;
+            // aleatorio
+            break;
+
             case 'R':
-                // ciclo de repetición
+            // ciclo de repetición
+            break;
+
+            case 'A': {
+            string input;
+
+            do {
+                clearScreen();
+                lista->mostrarListaReproduccion();
+
+                cin >> input;
+
+                if (input.size() > 1 && input[0] == 'S') {
+                    int num = stoi(input.substr(1));
+                    lista->saltarACancion(num);
+                    break;
+                }
+            } while (input != "V");
                 break;
-            case 'A':
-                // lista actual
-                break;
+            }
+
             case 'L':
                 // catálogo completo
                 break;
+
             case 'X':
                 //LOGICA PARA GUARDAR ESTADOOOO
                 salir = true;
                 break;
+
             default:
                 //HAY QUE HACER LA LOGICA POR SI SE CAE EL SISTEMA
                 cout << "Opcion no valida. Intente de nuevo." << endl;
@@ -120,10 +152,10 @@ int main() {
         }
     }
 
-    delete a;
+    delete listaAlmacenamiento;
+    delete lista;
     return 0;
-    return 0;
-    }
+}
 
 
 

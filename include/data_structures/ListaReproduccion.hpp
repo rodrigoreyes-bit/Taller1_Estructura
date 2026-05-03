@@ -1,25 +1,20 @@
-//
-// Created by Rodrigo on 4/9/2026.
-//
-
 #ifndef TALLER1_ESTRUCTURA_LISTAREPRODUCCION_HPP
 #define TALLER1_ESTRUCTURA_LISTAREPRODUCCION_HPP
 #include "../classes/Almacenamiento.hpp"
 #include "Nodo.h"
 
-//Implementar listas entrelazadas en la lista de reproducción. Hacer struct de nodos con istancia de las canciones
+//Implementar listas entrelazadas en la lista de reproducción. Hacer struct de nodos con instancia de las canciones
 //deseadas de manera privada
-
 
 class ListaReproduccion {
 private:
-    Nodo *inicio;
+    Nodo* inicio; ///no se si sacarlo o
     string estadoReproduccion;
     string estadoAleatorio;
     string estadoRepeticion;
 
 public:
-    ListaReproduccion();
+    ListaReproduccion(Almacenamiento* lista);
 
     void cambiarEstado();
 
@@ -31,10 +26,9 @@ public:
     void retrocederCancion();
 
     void mostrarListaReproduccion();
+    void saltarACancion(int pos);
 
     void protocoloAleatorio(int opcion);
 
 };
-
-
 #endif //TALLER1_ESTRUCTURA_LISTAREPRODUCCIÓN_HPP

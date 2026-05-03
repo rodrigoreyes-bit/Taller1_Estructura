@@ -2,23 +2,18 @@
 #define TALLER1_ESTRUCTURA_ALMACENAMIENTO_HPP
 #include <iostream>
 #include <string>
-#include "../data_structures/ListaReproduccion.hpp"
-#include "Cancion.hpp"
 #include "../data_structures/Nodo.h"
 
 using namespace std;
 
 
 class Almacenamiento {
-private:
-    Nodo* str = nullptr;
-
 public:
-    Almacenamiento(); //Constructor
+    Nodo* str = nullptr;
+    Almacenamiento();
     void crearCanción(int id, string nombre, string artista, string album, int ano, int duracion, string ubicacion);
 
     void mostrarListaCanciones();
-
 };
 
 

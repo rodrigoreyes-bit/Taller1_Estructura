@@ -4,9 +4,7 @@
 #include <iostream>
 #include <string>
 
-
 Configuracion::Configuracion():
-
     idCancionActual(-1),
     estaPausado(true),
     modoAleatorio(false),

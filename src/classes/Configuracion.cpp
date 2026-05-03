@@ -47,4 +47,27 @@ void Configuracion::cargarArchivoConfig() {
     }
 }
 
+void Configuracion::sobreescribirArchivoConfig() {
+
+
+}
+
+
+void Configuracion::insertarIdPendientes(int id) {
+    nodoID* nuevo = new nodoID();
+    nuevo->id = id;
+    nuevo-> sig = nullptr;
+
+    if (listaPendientes == nullptr) {
+        listaPendientes = nuevo;
+    }
+    else {
+        nodoID* aux = listaPendientes;
+        while (aux->sig != nullptr) {
+            aux = aux->sig;
+        }
+        aux->sig = nuevo;
+    }
+}
+
 

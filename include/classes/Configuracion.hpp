@@ -25,9 +25,9 @@ class Configuracion {
         void sobreescribirArchivoConfig();
         void insertarIdPendientes(int id, bool guardar = true);
         void setPausa(bool estado);
-        void setRandom();
-        void setRepeticion();
-        void setIdCancionActual();
+        void setRandom(bool estadoR);
+        void setRepeticion(int modoRep);
+        void setIdCancionActual(int id);
 
 
 

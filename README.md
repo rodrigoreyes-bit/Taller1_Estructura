@@ -1,4 +1,4 @@
-# Aparato reproductor (HAY Q VER UN NOMBRE NUEVO)
+# Aparato reproductor (HAY Q VER UN NOMBRE NUEVO, SNOOPIFY?)
 
 **Desarrollado por:**
 * Ninibeth Pérez Cortés - papaFritaUwU

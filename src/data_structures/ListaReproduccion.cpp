@@ -5,15 +5,91 @@ using namespace std;
 
 ListaReproduccion::ListaReproduccion() {
     this->inicio = nullptr;
-    this->estadoReproduccion = "Detenido";
+    this->actual = nullptr;
+    this->estadoReproduccion = "En pausa";
     this->estadoAleatorio = "Desactivado";
     this->estadoRepeticion = "Desactivado";
+}
+
+string ListaReproduccion::getEstadoReproduccion() {
+    return estadoReproduccion;
+}
+
+void ListaReproduccion::setEstadoReproduccion(string estado) {
+    this->estadoReproduccion = estado;
+}
+
+Cancion* ListaReproduccion::getCancionActual(){
+    if (actual == nullptr) {
+        return nullptr;
+    }
+    return actual->dato;
+}
+
+void ListaReproduccion::cambiarEstadoReproduccion() {
+    if (actual == nullptr) {
+        return;
+    }
+    if (estadoReproduccion == "Reproduciendo") {
+        estadoReproduccion = "En pausa";
+    } else {
+        estadoReproduccion = "Reproduciendo";
+    }
+}
+
+void ListaReproduccion::pistaAnterior() {
+    if (actual == nullptr || actual->anterior == nullptr) {
+        return;
+    }
+    actual = actual->anterior;
+    estadoReproduccion = "Reproduciendo";
+
+}
+
+void ListaReproduccion::pistaSiguiente(Almacenamiento *alm) {
+    if (actual == nullptr) {
+        return;
+    }
+    if (actual->siguiente != nullptr) {
+        actual = actual->siguiente;
+        estadoReproduccion = "Reproduciendo";
+    } else {
+        //se obtienen el total de canciones del almacenamientoo
+        int total = 0;
+        Nodo* aux = alm->getPrimerNodo();
+        while (aux != nullptr) {
+            total++;
+            aux = aux->siguiente;
+        }
+
+        if (total == 0) return;
+        //en el caso de q este en aleatorio se randomizan las canciones
+        int indiceAleatorio = (rand() % total) + 1;
+        Cancion* elegida = alm->getCancionIndice(indiceAleatorio);
+
+        if (elegida != nullptr) {
+            agregarAlFinal(elegida);
+            actual = actual->siguiente;
+            estadoReproduccion = "Reproduciendo";
+
+            //dps de la cancion, tambien se agregan las canciones que estaban de forma aleatoria a la cola
+            for (int i = 1; i <= total; i++) {
+                if (i != indiceAleatorio) {
+                    Cancion* otra = alm->getCancionIndice(i);
+                    if (otra != nullptr) {
+                        agregarAlFinal(otra);
+                    }
+                }
+            }
+        }
+    }
 }
 
 void ListaReproduccion::agregarAlFinal(Cancion* cancion) {
     Nodo* nuevo = new Nodo(cancion);
     if (inicio == nullptr) {
         inicio = nuevo;
+        actual = inicio;
     } else {
         Nodo* aux = inicio;
         while (aux->siguiente != nullptr) {
@@ -26,31 +102,35 @@ void ListaReproduccion::agregarAlFinal(Cancion* cancion) {
 
 void ListaReproduccion::mostrarListaReproduccion() {
     if (inicio == nullptr) {
-        cout << "No hay canciones disponibles." << endl;
+        cout << "Actual: Ninguna" << endl;
+        cout << "Lista de reproduccion actual:" << endl;
+        cout << "  Vacia" << endl;
+        cout << "Opciones:" << endl;
+        cout << "  V - Volver al menu principal" << endl;
+        cout << "Ingrese Opcion: ";
         return;
     }
-    //acá falta agregar lo de (S-R1) !!!!!!!!!!!!!!!!!!!!!!!! -> Actual (S-R1):
-    cout << "Actual: " << inicio->dato->getNombre() << " - " << inicio->dato->getArtista()<< endl;
-
+    cout << "Actual: " << inicio->dato->getNombre() << " - " << inicio->dato->getArtista() << endl;
     cout << "Lista de reproduccion actual:" << endl;
+
     Nodo* cursor = inicio->siguiente;
 
     if (cursor == nullptr) {
-        cout << "Vacia" << endl;
+        cout << "  Vacia" << endl;
     } else {
         int i = 1;
         while (cursor != nullptr) {
-            cout << i << ". " << cursor->dato->getNombre() << " - " << cursor->dato->getArtista() << endl;
+            cout << "  " << i << ". " << cursor->dato->getNombre() << " - " << cursor->dato->getArtista() << endl;
             cursor = cursor->siguiente;
             i++;
         }
     }
-
     cout << "Opciones:" << endl;
     if (inicio->siguiente != nullptr) {
-        cout << "S<num> - Saltar a la cancion seleccionada" << endl;
+        cout << "  S<num> - Saltar a la cancion seleccionada" << endl;
     }
-    cout << "V - Volver al menu principal" << endl;
+    cout << "  V - Volver al menu principal" << endl;
+    cout << "Ingrese Opcion: ";
 }
 
 void ListaReproduccion::saltarACancion(int pos) {
@@ -78,4 +158,16 @@ void ListaReproduccion::saltarACancion(int pos) {
 
     inicio = cursor;
     inicio->anterior = nullptr;
+}
+
+void ListaReproduccion::reproducirAltiro(Cancion* cancion) {
+    Nodo* aux = inicio;
+    while (aux != nullptr) {
+        Nodo* temp = aux;
+        aux = aux->siguiente;
+        delete temp;
+    }
+    inicio = new Nodo(cancion);
+    actual = inicio;
+    estadoReproduccion = "Reproduciendo";
 }

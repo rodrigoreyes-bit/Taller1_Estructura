@@ -1,11 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <cstdlib>
 #include <string>
+#include <limits>
 #include "../include/classes/Almacenamiento.hpp"
 #include "../include/data_structures/ListaReproduccion.hpp"
-#include "classes/Configuracion.hpp"
+#include "../include/classes/Configuracion.hpp"
 
 using namespace std;
 
@@ -62,7 +62,7 @@ void clearScreen() {
     system("cls");
 #else
     system("clear");
-#    endif
+#endif
 }
 
 void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAct, string& artistaAct, string& albumAct, int& anioAct) {
@@ -94,11 +94,9 @@ void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAc
         cout << "Ingrese Opcion: ";
         cin >> input;
 
-        // Tomar la letra y pasarla a mayúscula
         char subOpcion = toupper(input[0]);
         int idx = -1;
 
-        // Si el input tiene más de 1 caracter
         if (input.length() > 1) {
             try {
                 idx = stoi(input.substr(1));
@@ -114,11 +112,15 @@ void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAc
         else if (subOpcion == 'R' && idx != -1) {
             Cancion* elegida = alm->getCancionIndice(idx);
             if (elegida != nullptr) {
+                lr->reproducirAltiro(elegida);
+
                 cancionAct = elegida->getNombre();
                 artistaAct = elegida->getArtista();
                 albumAct = elegida->getAlbum();
                 anioAct = elegida->getAnio();
+
                 cout << "Reproduciendo ahora: " << cancionAct << endl;
+
             } else {
                 cout << "Indice no encontrado en la lista." << endl;
             }
@@ -128,6 +130,7 @@ void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAc
             if (elegida != nullptr) {
                 lr->agregarAlFinal(elegida);
                 cout << "Cancion agregada a la lista de reproduccion actual: " << elegida->getNombre() << endl;
+
             } else {
                 cout << "Indice no encontrado" << endl;
             }
@@ -155,7 +158,7 @@ void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAc
 
             alm->crearCanción(id, nom, art, alb, an, dur, ubi);
             alm->guardarEnArchivo();
-            cout << "Cancion registrada correctamente y guardada en music_source.txt" << endl;
+            cout << "Cancion registrada correctamente" << endl;
         }
         else if (subOpcion == 'D' && idx != -1) {
             Cancion* elegida = alm->getCancionIndice(idx);
@@ -171,23 +174,21 @@ void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAc
         }
     }
 }
-// ==============================================================================
-
 
 int main() {
-
     Configuracion* config1 = new Configuracion();
-    config1 ->cargarArchivoConfig();
+    config1->cargarArchivoConfig();
+    srand(time(0));
 
     Almacenamiento* listaAlmacenamiento = new Almacenamiento();
     lecturaCanciones(listaAlmacenamiento);
 
-    char opcion;
+    string entradaMenu;
     bool salir = false;
 
     ListaReproduccion* lista = new ListaReproduccion();
 
-    string estadoActual = "Detenido";
+    string estadoActual = "En pausa";
     string modoActual = "";
     string cancionActual = "Ninguna";
     string artistaActual = "Desconocido";
@@ -198,24 +199,42 @@ int main() {
         clearScreen();
         menuOpciones(estadoActual, modoActual, cancionActual, artistaActual, albumActual, anioActual);
 
-        cin >> opcion;
-        opcion = toupper(opcion);
+        cin >> entradaMenu;
+        char opcion = toupper(entradaMenu[0]);
 
         switch (opcion) {
             case 'W':
-                // pausa/play
+                lista->cambiarEstadoReproduccion();
+                estadoActual = lista->getEstadoReproduccion();
                 break;
+
             case 'Q':
-                // anterior
+                lista->pistaAnterior();
+                if (lista->getCancionActual() != nullptr) {
+                    Cancion* c = lista->getCancionActual();
+                    cancionActual = c->getNombre();
+                    artistaActual = c->getArtista();
+                    albumActual = c->getAlbum();
+                    anioActual = c->getAnio();
+                    estadoActual = lista->getEstadoReproduccion();
+                }
                 break;
+
             case 'E':
-                // siguiente
+                lista->pistaSiguiente(listaAlmacenamiento);
+                if (lista->getCancionActual() != nullptr) {
+                    Cancion* c = lista->getCancionActual();
+                    cancionActual = c->getNombre();
+                    artistaActual = c->getArtista();
+                    albumActual = c->getAlbum();
+                    anioActual = c->getAnio();
+                    estadoActual = lista->getEstadoReproduccion();
+                }
                 break;
+
             case 'S':
-                // aleatorio
                 break;
             case 'R':
-                // ciclo de repetición
                 break;
             case 'A': {
                 string input;
@@ -236,7 +255,6 @@ int main() {
                 ejecutarmenuL(listaAlmacenamiento, lista, cancionActual, artistaActual, albumActual, anioActual);
                 break;
             case 'X':
-                // LOGICA PARA GUARDAR ESTADOOOO
                 salir = true;
                 break;
             default:

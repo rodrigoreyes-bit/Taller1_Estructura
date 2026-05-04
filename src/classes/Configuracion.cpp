@@ -123,6 +123,21 @@ void Configuracion::setPausa(bool estado) {
     sobreescribirArchivoConfig();
 }
 
+void Configuracion::setRandom(bool estadoR) {
+    modoAleatorio = estadoR;
+    sobreescribirArchivoConfig();
+}
+
+void Configuracion::setRepeticion(int modoRep) {
+    repeticion = modoRep;
+    sobreescribirArchivoConfig();
+}
+
+void Configuracion::setIdCancionActual(int id) {
+    idCancionActual = id;
+    sobreescribirArchivoConfig();
+}
+
 
 
 

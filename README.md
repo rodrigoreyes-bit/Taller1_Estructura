@@ -14,8 +14,8 @@ Aparato reproductor es un reproductor de música basado en consola desarrollado 
 * **Almacenamiento:** Gestiona el catálogo completo de canciones disponibles en el sistema.
 * **ListaReproduccion:** Controla la cola actual, el puntero a la canción en reproducción y los estados.
 
-## Compilación y Ejecución
-Para compilar este proyecto, se requiere un compilador de C++ (GCC/G++) instalado en su sistema. 
+## Compilación
+Para compilar este proyecto, se requiere un compilador de C++ (GCC/G++) instalado en su sistema.
+//ARREGLAR ESTO IGUAL
+Desde la raíz del proyecto (donde se encuentra el archivo `main.cpp`) ejecutar el programa
 
-### 1. Compilación
-Desde la raíz del proyecto (donde se encuentra el archivo `main.cpp`)

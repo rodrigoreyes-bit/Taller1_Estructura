@@ -12,9 +12,6 @@ private:
 
 public:
     ListaReproduccion();
-    // Debe tener conocimiento del estado de la repeticion, debe tener un protocolo para eliminar canciones de la lista
-    // una vez ya se hayan reproducido, esto excepto a que la instancia de estadoRepeticion sea "Repetir Todas", en ese caso
-    // se guardan las canciones.
 
     Cancion* getCancionActual();
     void cambiarEstadoReproduccion(Configuracion* c); //W

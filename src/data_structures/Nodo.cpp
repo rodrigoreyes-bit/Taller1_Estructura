@@ -5,5 +5,4 @@
 Nodo::Nodo(Cancion* cancion) {
     this->dato = cancion;
     this->siguiente = nullptr;
-    this->anterior = nullptr;
 }

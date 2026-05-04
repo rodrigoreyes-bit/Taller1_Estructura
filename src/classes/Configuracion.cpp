@@ -10,7 +10,7 @@ Configuracion::Configuracion():
     modoAleatorio(false),
     repeticion(0),
     listaPendientes(nullptr){
-
+    cargarArchivoConfig();
 }
 
 
@@ -33,7 +33,7 @@ void Configuracion::cargarArchivoConfig() {
             arch >> val;
             if (val ==1) {
                 this->estaPausado = true;
-            }else {
+            }else if (val == 0) {
                 this->estaPausado = false;
             }
         }

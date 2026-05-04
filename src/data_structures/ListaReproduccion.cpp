@@ -167,3 +167,25 @@ void ListaReproduccion::reproducirAltiro(Cancion* cancion, Configuracion* c) {
     c->setPausa(false);
     c->setIdCancionActual(actual->dato->getId());
 }
+
+void ListaReproduccion::repetirCanciones(int modoRepe) {
+    if (actual == nullptr){return;}
+
+    if (modoRepe == 1) {return;}
+
+    if (actual->siguiente ==nullptr && modoRepe == 2) {
+        actual = inicio;
+    }
+
+    if (actual->siguiente != nullptr) {
+        actual = actual->siguiente;
+    }else {
+        actual = nullptr;
+    }
+
+}
+
+
+void mezclarLista() {
+
+}

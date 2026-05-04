@@ -50,7 +50,7 @@ void menuOpciones(Configuracion* cfg, string cancion, string artista, string alb
     cout << "  Q - Pista Anterior" << endl;
     cout << "  E - Pista Siguiente" << endl;
     cout << "  S - Activar/Desactivar modo aleatorio" << endl;
-    cout << "  R - Repeticion (Desactivado/Repetir una/Repetir todas)" << endl;
+    cout << "  R - Repeticion (Desactivado (0) /Repetir una (1) /Repetir todas (2))" << endl;
     cout << "  A - Ver lista de reproduccion actual" << endl;
     cout << "  L - Listado de canciones" << endl;
     cout << "  X - Salir" << endl;
@@ -175,6 +175,7 @@ void ejecutarmenuL(Almacenamiento* alm, Configuracion* c, ListaReproduccion* lr,
     }
 }
 
+
 int main() {
     Configuracion* config1 = new Configuracion();
     config1->cargarArchivoConfig();
@@ -230,10 +231,18 @@ int main() {
                 }
                 break;
 
-            case 'S':
+            case 'S': {
+                //djihh
+            }
                 break;
-            case 'R':
+            case 'R': {
+                int modoActual = config1->getRepeticion();
+                int eleccion;
+                cin >> eleccion;
+                config1->setRepeticion(eleccion);
                 
+
+            }
                 break;
             case 'A': {
                 string input;

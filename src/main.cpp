@@ -65,7 +65,7 @@ void clearScreen() {
 #endif
 }
 
-void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAct, string& artistaAct, string& albumAct, int& anioAct) {
+void ejecutarmenuL(Almacenamiento* alm, Configuracion* c, ListaReproduccion* lr, string& cancionAct, string& artistaAct, string& albumAct, int& anioAct) {
     string input;
     bool volver = false;
 
@@ -112,7 +112,7 @@ void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAc
         else if (subOpcion == 'R' && idx != -1) {
             Cancion* elegida = alm->getCancionIndice(idx);
             if (elegida != nullptr) {
-                lr->reproducirAltiro(elegida);
+                lr->reproducirAltiro(elegida, c);
 
                 cancionAct = elegida->getNombre();
                 artistaAct = elegida->getArtista();
@@ -205,31 +205,28 @@ int main() {
 
         switch (opcion) {
             case 'W':
-                lista->cambiarEstadoReproduccion();
-                estadoActual = lista->getEstadoReproduccion();
+                lista->cambiarEstadoReproduccion(config1);
                 break;
 
             case 'Q':
-                lista->pistaAnterior();
+                lista->pistaAnterior(config1);
                 if (lista->getCancionActual() != nullptr) {
                     Cancion* c = lista->getCancionActual();
                     cancionActual = c->getNombre();
                     artistaActual = c->getArtista();
                     albumActual = c->getAlbum();
                     anioActual = c->getAnio();
-                    estadoActual = lista->getEstadoReproduccion();
                 }
                 break;
 
             case 'E':
-                lista->pistaSiguiente(listaAlmacenamiento);
+                lista->pistaSiguiente(listaAlmacenamiento, config1);
                 if (lista->getCancionActual() != nullptr) {
                     Cancion* c = lista->getCancionActual();
                     cancionActual = c->getNombre();
                     artistaActual = c->getArtista();
                     albumActual = c->getAlbum();
                     anioActual = c->getAnio();
-                    estadoActual = lista->getEstadoReproduccion();
                 }
                 break;
 
@@ -246,7 +243,7 @@ int main() {
 
                     if (input.size() > 1 && toupper(input[0]) == 'S') {
                         int num = stoi(input.substr(1));
-                        lista->saltarACancion(num);
+                        lista->saltarACancion(num, config1);
                         break;
                     }
                 } while (toupper(input[0]) != 'V');

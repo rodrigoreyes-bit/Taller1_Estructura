@@ -51,7 +51,7 @@ void Configuracion::cargarArchivoConfig() {
         else if (variable == "cancionesPendientes") {
             int id;
             while (arch >> id) {
-                this->insertarIdPendientes(id);
+                this->insertarIdPendientes(id, false);
             }
         }
 
@@ -95,7 +95,7 @@ void Configuracion::sobreescribirArchivoConfig() {
 }
 
 
-void Configuracion::insertarIdPendientes(int id) {
+void Configuracion::insertarIdPendientes(int id, bool guardar) {
     nodoID* nuevo = new nodoID();
     nuevo->id = id;
     nuevo-> sig = nullptr;
@@ -110,6 +110,19 @@ void Configuracion::insertarIdPendientes(int id) {
         }
         aux->sig = nuevo;
     }
+
+    if (guardar) {
+        sobreescribirArchivoConfig();
+    }
+
+
 }
+
+void Configuracion::setPausa(bool estado) {
+    estaPausado = estado;
+    sobreescribirArchivoConfig();
+}
+
+
 
 

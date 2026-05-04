@@ -44,35 +44,7 @@ void ListaReproduccion::pistaSiguiente(Almacenamiento *alm, Configuracion* c) {
         c->setIdCancionActual(actual->dato->getId());
 
     } else {
-        //se obtienen el total de canciones del almacenamientoo
-        int total = 0;
-        Nodo* aux = alm->getPrimerNodo();
-        while (aux != nullptr) {
-            total++;
-            aux = aux->siguiente;
-        }
 
-        if (total == 0) return;
-        //en el caso de q este en aleatorio se randomizan las canciones
-        int indiceAleatorio = (rand() % total) + 1;
-        Cancion* elegida = alm->getCancionIndice(indiceAleatorio);
-
-        if (elegida != nullptr) {
-            agregarAlFinal(elegida);
-            actual = actual->siguiente;
-            c->setPausa(false);
-            c->setIdCancionActual(actual->dato->getId());
-            //dps de la cancion, tambien se agregan las canciones que estaban de forma aleatoria a la cola
-            for (int i = 1; i <= total; i++) {
-                if (i != indiceAleatorio) {
-                    Cancion* otra = alm->getCancionIndice(i);
-                    if (otra != nullptr) {
-                        agregarAlFinal(otra);
-                    }
-                }
-            }
-        }
-    }
 }
 
 void ListaReproduccion::agregarAlFinal(Cancion* cancion) {
@@ -168,13 +140,19 @@ void ListaReproduccion::reproducirAltiro(Cancion* cancion, Configuracion* c) {
     c->setIdCancionActual(actual->dato->getId());
 }
 
-void ListaReproduccion::repetirCanciones(int modoRepe) {
+void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion* c) {
     if (actual == nullptr){return;}
 
     if (modoRepe == 1) {return;}
 
     if (actual->siguiente ==nullptr && modoRepe == 2) {
+
+        if (c->getRandom()) {
+
+        }
+
         actual = inicio;
+
     }
 
     if (actual->siguiente != nullptr) {
@@ -186,6 +164,58 @@ void ListaReproduccion::repetirCanciones(int modoRepe) {
 }
 
 
-void mezclarLista() {
+void mezclarLista(Almacenamiento* alm) {
+        if (alm == nullptr){return;}
+
+        if (repeticionactivada) {
+            int total = 0;
+            Nodo* aux = alm->getPrimerNodo();
+            while (aux != nullptr) {
+                total++;
+                aux = aux->siguiente;
+            }
+
+            if (total==0){return;}
+
+            int indiceAleatorio = (rand() % total) + 1;
+            Cancion* elegida = alm->getCancionIndice(indiceAleatorio);
+            if (elegida != nullptr) {
+                agregarAlFinal(elegida);
+            }
+        }else if (pistasiguienteactivada y aleatorio encendido ) {
+            //se obtienen el total de canciones del almacenamientoo
+            int total = 0;
+            Nodo* aux = alm->getPrimerNodo();
+            while (aux != nullptr) {
+                total++;
+                aux = aux->siguiente;
+            }
+
+            if (total == 0) return;
+            //en el caso de q este en aleatorio se randomizan las canciones
+            int indiceAleatorio = (rand() % total) + 1;
+            Cancion* elegida = alm->getCancionIndice(indiceAleatorio);
+
+            if (elegida != nullptr) {
+                agregarAlFinal(elegida);
+                actual = actual->siguiente;
+                c->setPausa(false);
+                c->setIdCancionActual(actual->dato->getId());
+                //dps de la cancion, tambien se agregan las canciones que estaban de forma aleatoria a la cola
+                for (int i = 1; i <= total; i++) {
+                    if (i != indiceAleatorio) {
+                        Cancion* otra = alm->getCancionIndice(i);
+                        if (otra != nullptr) {
+                            agregarAlFinal(otra);
+                        }
+                    }
+                }
+            }
+        }
+
+
+
 
 }
+
+

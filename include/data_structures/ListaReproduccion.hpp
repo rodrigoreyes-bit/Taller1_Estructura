@@ -25,8 +25,8 @@ public:
     void mostrarListaReproduccion(); //A
     void saltarACancion(int pos, Configuracion* c); //A
     void reproducirAltiro(Cancion* cancion, Configuracion* c); //A
-    void repetirCanciones(int modoRepe); //r
-    void mezclarLista(); // r y s
+    void repetirCanciones(int modoRepe, Configuracion* c); //r
+    void mezclarLista(Almacenamiento* alm); // r y s
 
     //void protocoloAleatorio(int opcion);
 

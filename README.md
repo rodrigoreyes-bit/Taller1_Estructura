@@ -1,4 +1,4 @@
-# Aparato reproductor
+# Aparato reproductor (HAY Q VER UN NOMBRE NUEVO)
 
 **Desarrollado por:**
 * Ninibeth Pérez Cortés - papaFritaUwU

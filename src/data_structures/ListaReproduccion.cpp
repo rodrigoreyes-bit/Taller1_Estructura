@@ -164,18 +164,22 @@ void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion* c) {
 }
 
 
-void mezclarLista(Almacenamiento* alm) {
-        if (alm == nullptr){return;}
+void ListaReproduccion::mezclarLista(Almacenamiento* alm, Configuracion* c) {
+        if (alm == nullptr || c == nullptr){return;}
+
+        int total = 0;
+        Nodo* aux = alm->getPrimerNodo();
+        while (aux != nullptr) {
+            total++;
+            aux = aux->siguiente;
+        }
+
+        if (total==0){return;}
+
+        bool randomOnn =c->getRandom();
+        int modoRep = c->getRepeticion();
 
         if (repeticionactivada) {
-            int total = 0;
-            Nodo* aux = alm->getPrimerNodo();
-            while (aux != nullptr) {
-                total++;
-                aux = aux->siguiente;
-            }
-
-            if (total==0){return;}
 
             int indiceAleatorio = (rand() % total) + 1;
             Cancion* elegida = alm->getCancionIndice(indiceAleatorio);
@@ -212,9 +216,6 @@ void mezclarLista(Almacenamiento* alm) {
                 }
             }
         }
-
-
-
 
 }
 

@@ -7,15 +7,7 @@
 ListaReproduccion::ListaReproduccion() {
     this->inicio = nullptr;
     this->actual = nullptr;
-    //this->estadoReproduccion = "En pausa";
-    //this->estadoAleatorio = "Desactivado";
-    //this->estadoRepeticion = "Desactivado";
-}
 
-
-
-void ListaReproduccion::setEstadoReproduccion(string estado) {
-    this->estadoReproduccion = estado;
 }
 
 Cancion* ListaReproduccion::getCancionActual(){
@@ -32,22 +24,25 @@ void ListaReproduccion::cambiarEstadoReproduccion(Configuracion* c) {
     c->setPausa(!c->getPausa());
 }
 
-void ListaReproduccion::pistaAnterior() {
+void ListaReproduccion::pistaAnterior(Configuracion* c) {
     if (actual == nullptr || actual->anterior == nullptr) {
         return;
     }
     actual = actual->anterior;
-    estadoReproduccion = "Reproduciendo";
+    c->setIdCancionActual(actual->dato->getId());
+    c->setPausa(false);
 
 }
 
-void ListaReproduccion::pistaSiguiente(Almacenamiento *alm) {
+void ListaReproduccion::pistaSiguiente(Almacenamiento *alm, Configuracion* c) {
     if (actual == nullptr) {
         return;
     }
     if (actual->siguiente != nullptr) {
         actual = actual->siguiente;
-        estadoReproduccion = "Reproduciendo";
+        c->setPausa(false);
+        c->setIdCancionActual(actual->dato->getId());
+
     } else {
         //se obtienen el total de canciones del almacenamientoo
         int total = 0;
@@ -65,8 +60,8 @@ void ListaReproduccion::pistaSiguiente(Almacenamiento *alm) {
         if (elegida != nullptr) {
             agregarAlFinal(elegida);
             actual = actual->siguiente;
-            estadoReproduccion = "Reproduciendo";
-
+            c->setPausa(false);
+            c->setIdCancionActual(actual->dato->getId());
             //dps de la cancion, tambien se agregan las canciones que estaban de forma aleatoria a la cola
             for (int i = 1; i <= total; i++) {
                 if (i != indiceAleatorio) {
@@ -128,7 +123,7 @@ void ListaReproduccion::mostrarListaReproduccion() {
     cout << "Ingrese Opcion: ";
 }
 
-void ListaReproduccion::saltarACancion(int pos) {
+void ListaReproduccion::saltarACancion(int pos, Configuracion* c) {
     if (inicio == nullptr || inicio->siguiente == nullptr) {
         return;
     }
@@ -153,9 +148,14 @@ void ListaReproduccion::saltarACancion(int pos) {
 
     inicio = cursor;
     inicio->anterior = nullptr;
+    actual = inicio;
+
+    c->setIdCancionActual(actual->dato->getId());
+    c->setPausa(false);
+
 }
 
-void ListaReproduccion::reproducirAltiro(Cancion* cancion) {
+void ListaReproduccion::reproducirAltiro(Cancion* cancion, Configuracion* c) {
     Nodo* aux = inicio;
     while (aux != nullptr) {
         Nodo* temp = aux;
@@ -164,5 +164,6 @@ void ListaReproduccion::reproducirAltiro(Cancion* cancion) {
     }
     inicio = new Nodo(cancion);
     actual = inicio;
-    estadoReproduccion = "Reproduciendo";
+    c->setPausa(false);
+    c->setIdCancionActual(actual->dato->getId());
 }

@@ -233,6 +233,7 @@ int main() {
             case 'S':
                 break;
             case 'R':
+                
                 break;
             case 'A': {
                 string input;

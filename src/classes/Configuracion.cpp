@@ -15,7 +15,7 @@ Configuracion::Configuracion():
 
 
 void Configuracion::cargarArchivoConfig() {
-    std::ifstream arch("status.cfg");
+    std::ifstream arch("data/status.cfg");
 
     if (!arch.is_open()) {
         std::cout << "No se encontro archivo status.cfg" << std::endl;
@@ -59,7 +59,7 @@ void Configuracion::cargarArchivoConfig() {
 }
 
 void Configuracion::sobreescribirArchivoConfig() {
-    std:: ofstream arch("status.cfg");
+    std:: ofstream arch("data/status.cfg");
     if (!arch.is_open()) {
         std::cout << "No se encontró archivo status.cfg" << std::endl;
         return;

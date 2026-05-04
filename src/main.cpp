@@ -189,8 +189,8 @@ int main() {
 
     ListaReproduccion* lista = new ListaReproduccion();
 
-    string estadoActual = "En pausa";
-    string modoActual = "";
+
+    //estado actual era pausa o play y modo era aleatorio o no
     string cancionActual = "Ninguna";
     string artistaActual = "Desconocido";
     string albumActual = "Ninguno";
@@ -198,7 +198,7 @@ int main() {
 
     while (salir == false) {
         clearScreen();
-        menuOpciones(estadoActual, modoActual, cancionActual, artistaActual, albumActual, anioActual);
+        menuOpciones(config1, cancionActual, artistaActual, albumActual, anioActual);
 
         cin >> entradaMenu;
         char opcion = toupper(entradaMenu[0]);

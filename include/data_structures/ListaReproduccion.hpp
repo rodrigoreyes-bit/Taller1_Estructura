@@ -2,6 +2,8 @@
 #define TALLER1_ESTRUCTURA_LISTAREPRODUCCION_HPP
 #include "../classes/Almacenamiento.hpp"
 #include "Nodo.h"
+class Configuracion;
+
 class ListaReproduccion {
 private:
     Nodo* inicio;
@@ -20,10 +22,11 @@ public:
     // una vez ya se hayan reproducido, esto excepto a que la instancia de estadoRepeticion sea "Repetir Todas", en ese caso
     // se guardan las canciones.
 
-    string getEstadoReproduccion();
+
+
     void setEstadoReproduccion(string estado);
     Cancion* getCancionActual();
-    void cambiarEstadoReproduccion(); //W
+    void cambiarEstadoReproduccion(Configuracion* c); //W
     void pistaAnterior(); //Q
     void pistaSiguiente(Almacenamiento* alm); //E
 

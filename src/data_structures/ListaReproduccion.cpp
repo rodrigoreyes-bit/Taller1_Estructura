@@ -1,19 +1,18 @@
 
 #include "../../include/data_structures/ListaReproduccion.hpp"
 #include <iostream>
-using namespace std;
+#include "../../include/classes/Configuracion.hpp"
+//using namespace std;
 
 ListaReproduccion::ListaReproduccion() {
     this->inicio = nullptr;
     this->actual = nullptr;
-    this->estadoReproduccion = "En pausa";
-    this->estadoAleatorio = "Desactivado";
-    this->estadoRepeticion = "Desactivado";
+    //this->estadoReproduccion = "En pausa";
+    //this->estadoAleatorio = "Desactivado";
+    //this->estadoRepeticion = "Desactivado";
 }
 
-string ListaReproduccion::getEstadoReproduccion() {
-    return estadoReproduccion;
-}
+
 
 void ListaReproduccion::setEstadoReproduccion(string estado) {
     this->estadoReproduccion = estado;
@@ -26,15 +25,11 @@ Cancion* ListaReproduccion::getCancionActual(){
     return actual->dato;
 }
 
-void ListaReproduccion::cambiarEstadoReproduccion() {
+void ListaReproduccion::cambiarEstadoReproduccion(Configuracion* c) {
     if (actual == nullptr) {
         return;
     }
-    if (estadoReproduccion == "Reproduciendo") {
-        estadoReproduccion = "En pausa";
-    } else {
-        estadoReproduccion = "Reproduciendo";
-    }
+    c->setPausa(!c->getPausa());
 }
 
 void ListaReproduccion::pistaAnterior() {

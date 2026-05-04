@@ -17,7 +17,6 @@ public:
     void crearCanción(int id, string nombre, string artista, string album, int ano, int duracion, string ubicacion);
     Cancion* getCancionIndice(int indice);
     void eliminarCancion(int id);
-    int totalCanciones();
     void mostrarListaCanciones();
     bool existeID(int id);
     void guardarEnArchivo();

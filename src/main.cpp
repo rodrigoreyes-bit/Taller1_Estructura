@@ -41,8 +41,8 @@ void lecturaCanciones(Almacenamiento* a) {
     archivo.close();
 }
 
-void menuOpciones(string estado, string modo, string cancion, string artista, string album, int anio) {
-    cout << estado << " (" << modo << "): " << cancion << endl;
+void menuOpciones(Configuracion* cfg, string cancion, string artista, string album, int anio) {
+    cout << (cfg->getPausa() ? "En Pausa" : "Reproduciendo") << " (" << (cfg->getRandom() ? "S" : "NotS") << "): " << cancion << endl;
     cout << "Artista: " << artista << endl;
     cout << "Album: " << album << " [" << anio << "]" << endl;
     cout << "Opciones:" << endl;
@@ -178,6 +178,7 @@ void ejecutarmenuL(Almacenamiento* alm, ListaReproduccion* lr, string& cancionAc
 int main() {
     Configuracion* config1 = new Configuracion();
     config1->cargarArchivoConfig();
+
     srand(time(0));
 
     Almacenamiento* listaAlmacenamiento = new Almacenamiento();

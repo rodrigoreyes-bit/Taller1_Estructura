@@ -118,6 +118,7 @@ void Configuracion::insertarIdPendientes(int id, bool guardar) {
 
 }
 
+//setters
 void Configuracion::setPausa(bool estado) {
     estaPausado = estado;
     sobreescribirArchivoConfig();
@@ -137,6 +138,23 @@ void Configuracion::setIdCancionActual(int id) {
     idCancionActual = id;
     sobreescribirArchivoConfig();
 }
+
+//getters
+
+int Configuracion::getIdCancionActual() { return idCancionActual;}
+
+
+int Configuracion::getRepeticion() { return repeticion;}
+
+
+bool Configuracion::getRandom() { return modoAleatorio;}
+
+
+bool Configuracion::getPausa() { return estaPausado;}
+
+
+nodoID* Configuracion::getListaPendientes() { return listaPendientes;}
+
 
 
 

@@ -36,6 +36,6 @@ class Configuracion {
         bool getPausa();
         nodoID* getListaPendientes();
 
-
+//holi
 
 };

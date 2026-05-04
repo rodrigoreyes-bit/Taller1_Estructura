@@ -250,7 +250,7 @@ int main() {
                 break;
             }
             case 'L':
-                ejecutarmenuL(listaAlmacenamiento, lista, cancionActual, artistaActual, albumActual, anioActual);
+                ejecutarmenuL(listaAlmacenamiento, config1, lista, cancionActual, artistaActual, albumActual, anioActual);
                 break;
             case 'X':
                 salir = true;

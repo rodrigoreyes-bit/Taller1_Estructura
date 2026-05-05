@@ -25,7 +25,6 @@ public:
     void repetirCanciones(int modoRepe, Configuracion* c, Almacenamiento* alm); //r
     void mezclarListaRepeticion(Almacenamiento* alm, Configuracion* c); // r y s
 
-    //void protocoloAleatorio(int opcion);
 
 };
 #endif //TALLER1_ESTRUCTURA_LISTAREPRODUCCIÓN_HPP

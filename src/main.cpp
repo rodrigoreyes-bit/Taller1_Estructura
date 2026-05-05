@@ -240,7 +240,7 @@ int main() {
                 int eleccion;
                 cin >> eleccion;
                 config1->setRepeticion(eleccion);
-                
+                lista->repetirCanciones(eleccion,config1,listaAlmacenamiento);
 
             }
                 break;

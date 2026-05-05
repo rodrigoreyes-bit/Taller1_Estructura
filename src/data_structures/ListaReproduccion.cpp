@@ -174,7 +174,7 @@ void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion* c, Almacen
 
     if (modoRepe == 1) {return;}
 
-    if (actual->siguiente == nullptr && modoRepe == 2) {
+    if (actual->siguiente == nullptr) {
         if (modoRepe == 2) {
             if (c->getRandom()) {
                 mezclarListaRepeticion(alm,c);

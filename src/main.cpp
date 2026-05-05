@@ -5,7 +5,6 @@
 #include "../include/classes/Almacenamiento.hpp"
 #include "../include/data_structures/ListaReproduccion.hpp"
 #include "../include/classes/Configuracion.hpp"
-
 using namespace std;
 
 void lecturaCanciones(Almacenamiento *a) {

@@ -42,7 +42,7 @@ void lecturaCanciones(Almacenamiento* a) {
 }
 
 void menuOpciones(Configuracion* cfg, string cancion, string artista, string album, int anio) {
-    cout << (cfg->getPausa() ? "En Pausa" : "Reproduciendo") << " (" << (cfg->getRandom() ? "S" : "NotS") << "): " << cancion << endl;
+    cout << (cfg->getPausa() ? "En Pausa" : "Reproduciendo") << " (" << (cfg->getRandom() ? "S" : " ") << "-" <<((cfg->getRepeticion() == 1) ? "R1" : (cfg->getRepeticion() == 2) ? "RA" : " " )<< "): " << cancion << endl;
     cout << "Artista: " << artista << endl;
     cout << "Album: " << album << " [" << anio << "]" << endl;
     cout << "Opciones:" << endl;
@@ -232,7 +232,7 @@ int main() {
                 break;
 
             case 'S': {
-                //djihh
+                //
             }
                 break;
             case 'R': {

@@ -230,7 +230,7 @@ int main() {
                 break;
 
             case 'S': {
-                
+                config1->setRandom(true); //esto setea como true en el cfg
             }
             break;
             case 'R': {

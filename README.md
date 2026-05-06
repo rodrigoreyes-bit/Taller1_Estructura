@@ -1,4 +1,4 @@
-# Snoopify
+# Snoopify ੯‧̀͡⬮
 
 **Desarrollado por:**
 * Ninibeth Pérez Cortés - papaFritaUwU

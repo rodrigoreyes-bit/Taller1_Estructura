@@ -35,7 +35,4 @@ class Configuracion {
         bool getRandom();
         bool getPausa();
         nodoID* getListaPendientes();
-
-//holi
-
 };

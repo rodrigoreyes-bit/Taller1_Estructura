@@ -1,6 +1,5 @@
 #include "../../include/classes/Cancion.hpp"
 
-// Constructor
 Cancion::Cancion(int id, string nombre, string artista, string album, int anio, int duracion, string ubicacion) {
     this->id = id;
     this->nombre = nombre;

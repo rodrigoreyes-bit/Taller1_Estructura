@@ -26,7 +26,6 @@ void ListaReproduccion::pistaSiguiente(Configuracion *c) {
     if (actual == nullptr) {
         return;
     }
-
     if (actual->siguiente != nullptr) {
         actual = actual->siguiente;
         c->setPausa(false);
@@ -46,7 +45,6 @@ void ListaReproduccion::pistaAnterior(Configuracion *c) {
     if (actual == nullptr) {
         return;
     }
-
     if (actual->anterior != nullptr) {
         actual = actual->anterior;
         c->setIdCancionActual(actual->dato->getId());
@@ -94,7 +92,6 @@ void ListaReproduccion::mostrarListaReproduccion() {
     cout << "Lista de reproduccion actual:" << endl;
 
     Nodo *cursor = actual->siguiente;
-
     if (cursor == nullptr) {
         cout << "  Vacia" << endl;
     } else {
@@ -117,7 +114,6 @@ void ListaReproduccion::saltarACancion(int pos, Configuracion *c) {
     if (actual == nullptr || actual->siguiente == nullptr) {
         return;
     }
-
     Nodo *cursor = actual->siguiente;
     int i = 1;
 
@@ -129,7 +125,6 @@ void ListaReproduccion::saltarACancion(int pos, Configuracion *c) {
     if (cursor == nullptr) return;
 
     actual = cursor;
-
     c->setIdCancionActual(actual->dato->getId());
     c->setPausa(false);
 }
@@ -148,14 +143,17 @@ void ListaReproduccion::reproducirAltiro(Cancion *cancion, Configuracion *c) {
 }
 
 void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacenamiento *alm) {
-    if (actual == nullptr) { return; }
-
-    if (modoRepe == 1) { return; }
+    if (actual == nullptr) {
+        return;
+    }
+    if (modoRepe == 1) {
+        return;
+    }
 
     if (actual->siguiente == nullptr) {
         if (modoRepe == 2) {
             if (c->getRandom()) {
-                mezclarListaRepeticion(alm, c);
+                //mezclarListaRepeticion(alm, c); //ARREGLAR ESTA FUNCIOOOOON
             } else {
                 actual = inicio;
             }
@@ -167,7 +165,6 @@ void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacen
     }
     actual = actual->siguiente;
 }
-
 
 void ListaReproduccion::mezclarListaRepeticion(Almacenamiento* alm, ListaReproduccion* lr, Configuracion *c) {
     int total = 0;

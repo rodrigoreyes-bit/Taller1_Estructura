@@ -13,7 +13,6 @@ Configuracion::Configuracion():
     cargarArchivoConfig();
 }
 
-
 void Configuracion::cargarArchivoConfig() {
     std::ifstream arch("status.cfg");
 
@@ -54,14 +53,13 @@ void Configuracion::cargarArchivoConfig() {
                 this->insertarIdPendientes(id, false);
             }
         }
-
     }
 }
 
 void Configuracion::sobreescribirArchivoConfig() {
     std:: ofstream arch("data/status.cfg");
     if (!arch.is_open()) {
-        std::cout << "No se encontró archivo status.cfg" << std::endl;
+        std::cout << "No se encontro archivo status.cfg" << std::endl;
         return;
     }
 
@@ -90,10 +88,8 @@ void Configuracion::sobreescribirArchivoConfig() {
         aux = aux->sig;
     }
     arch << "\n";
-
     arch.close();
 }
-
 
 void Configuracion::insertarIdPendientes(int id, bool guardar) {
     nodoID* nuevo = new nodoID();
@@ -110,15 +106,11 @@ void Configuracion::insertarIdPendientes(int id, bool guardar) {
         }
         aux->sig = nuevo;
     }
-
     if (guardar) {
         sobreescribirArchivoConfig();
     }
-
-
 }
 
-//setters
 void Configuracion::setPausa(bool estado) {
     estaPausado = estado;
     sobreescribirArchivoConfig();
@@ -139,23 +131,12 @@ void Configuracion::setIdCancionActual(int id) {
     sobreescribirArchivoConfig();
 }
 
-//getters
-
 int Configuracion::getIdCancionActual() { return idCancionActual;}
-
 
 int Configuracion::getRepeticion() { return repeticion;}
 
-
 bool Configuracion::getRandom() { return modoAleatorio;}
-
 
 bool Configuracion::getPausa() { return estaPausado;}
 
-
 nodoID* Configuracion::getListaPendientes() { return listaPendientes;}
-
-
-
-
-

@@ -192,7 +192,6 @@ int main() {
 
     ListaReproduccion *lista = new ListaReproduccion();
 
-
     string cancionActual = "Ninguna";
     string artistaActual = "Desconocido";
     string albumActual = "Ninguno";

@@ -96,6 +96,3 @@ void Almacenamiento::guardarEnArchivo() {
     }
     archivo.close();
 }
-
-
-

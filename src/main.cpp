@@ -225,7 +225,7 @@ int main() {
                 break;
 
             case 'E':
-                lista->pistaSiguiente(config1);
+                lista->pistaSiguiente(config1, listaAlmacenamiento);
                 break;
 
             case 'S': {
@@ -240,18 +240,27 @@ int main() {
             }
             break;
             case 'A': {
-                string input;
-                do {
-                    clearScreen();
-                    lista->mostrarListaReproduccion();
-                    cin >> input;
+                string subInput;
+                bool volverA = false;
 
-                    if (input.size() > 1 && toupper(input[0]) == 'S') {
-                        int num = stoi(input.substr(1));
-                        lista->saltarACancion(num, config1);
-                        break;
+                while (!volverA) {
+                    lista->mostrarListaReproduccion();
+                    cout << "Ingrese Opción: ";
+                    cin >> subInput;
+
+                    if (toupper(subInput[0]) == 'V') {
+                        volverA = true;
                     }
-                } while (toupper(input[0]) != 'V');
+                    else if (toupper(subInput[0]) == 'S' && subInput.length() > 1) {
+                        try {
+                            int num = stoi(subInput.substr(1));
+                            lista->saltarACancion(num, config1);
+                            volverA = true;
+                        } catch (...) {
+                            cout << "Formato inválido (Ejemplo: S2)" << endl;
+                        }
+                    }
+                }
                 break;
             }
             case 'L':

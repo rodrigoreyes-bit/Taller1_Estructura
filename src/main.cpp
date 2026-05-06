@@ -224,24 +224,10 @@ int main() {
 
             case 'Q':
                 lista->pistaAnterior(config1);
-                if (lista->getCancionActual() != nullptr) {
-                    Cancion *c = lista->getCancionActual();
-                    cancionActual = c->getNombre();
-                    artistaActual = c->getArtista();
-                    albumActual = c->getAlbum();
-                    anioActual = c->getAnio();
-                }
                 break;
 
             case 'E':
-                lista->pistaSiguiente(listaAlmacenamiento, config1);
-                if (lista->getCancionActual() != nullptr) {
-                    Cancion *c = lista->getCancionActual();
-                    cancionActual = c->getNombre();
-                    artistaActual = c->getArtista();
-                    albumActual = c->getAlbum();
-                    anioActual = c->getAnio();
-                }
+                lista->pistaSiguiente(config1);
                 break;
 
             case 'S': {

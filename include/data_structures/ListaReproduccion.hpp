@@ -16,7 +16,7 @@ public:
     Cancion* getCancionActual();
     void cambiarEstadoReproduccion(Configuracion* c); //W
     void pistaAnterior(Configuracion* c); //Q
-    void pistaSiguiente(Almacenamiento* alm, Configuracion* c); //E
+    void pistaSiguiente(Configuracion* c); //E
 
     void agregarAlFinal(Cancion* cancion);
     void mostrarListaReproduccion(); //A

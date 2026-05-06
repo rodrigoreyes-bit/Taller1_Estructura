@@ -1,4 +1,3 @@
-
 #include "../../include/data_structures/ListaReproduccion.hpp"
 #include <iostream>
 #include "../../include/classes/Configuracion.hpp"
@@ -7,34 +6,23 @@ using namespace std;
 ListaReproduccion::ListaReproduccion() {
     this->inicio = nullptr;
     this->actual = nullptr;
-
 }
 
-Cancion* ListaReproduccion::getCancionActual(){
+Cancion *ListaReproduccion::getCancionActual() {
     if (actual == nullptr) {
         return nullptr;
     }
     return actual->dato;
 }
 
-void ListaReproduccion::cambiarEstadoReproduccion(Configuracion* c) {
+void ListaReproduccion::cambiarEstadoReproduccion(Configuracion *c) {
     if (actual == nullptr) {
         return;
     }
     c->setPausa(!c->getPausa());
 }
 
-void ListaReproduccion::pistaAnterior(Configuracion* c) {
-    if (actual == nullptr || actual->anterior == nullptr) {
-        return;
-    }
-    actual = actual->anterior;
-    c->setIdCancionActual(actual->dato->getId());
-    c->setPausa(false);
-
-}
-
-void ListaReproduccion::pistaSiguiente(Almacenamiento *alm, Configuracion* c) {
+void ListaReproduccion::pistaSiguiente(Configuracion *c) {
     if (actual == nullptr) {
         return;
     }
@@ -43,26 +31,47 @@ void ListaReproduccion::pistaSiguiente(Almacenamiento *alm, Configuracion* c) {
         actual = actual->siguiente;
         c->setPausa(false);
         c->setIdCancionActual(actual->dato->getId());
-    }
-    else {
+    } else {
         if (c->getRepeticion() == 2) {
-            actual = inicio; // Hacemos un bucle volviendo a la primera canción de la cola
+            actual = inicio;
             c->setPausa(false);
             c->setIdCancionActual(actual->dato->getId());
-        }
-        else {
-            c->setPausa(true);
+        } else {
+            c->setPausa(true); // Termina la lista
         }
     }
 }
 
-void ListaReproduccion::agregarAlFinal(Cancion* cancion) {
-    Nodo* nuevo = new Nodo(cancion);
+void ListaReproduccion::pistaAnterior(Configuracion *c) {
+    if (actual == nullptr) {
+        return;
+    }
+
+    if (actual->anterior != nullptr) {
+        actual = actual->anterior;
+        c->setIdCancionActual(actual->dato->getId());
+        c->setPausa(false);
+    } else {
+        // Si estamos en la primera y hay repetición, saltamos al final
+        if (c->getRepeticion() == 2) {
+            Nodo *aux = actual;
+            while (aux->siguiente != nullptr) {
+                aux = aux->siguiente;
+            }
+            actual = aux;
+            c->setIdCancionActual(actual->dato->getId());
+            c->setPausa(false);
+        }
+    }
+}
+
+void ListaReproduccion::agregarAlFinal(Cancion *cancion) {
+    Nodo *nuevo = new Nodo(cancion);
     if (inicio == nullptr) {
         inicio = nuevo;
         actual = inicio;
     } else {
-        Nodo* aux = inicio;
+        Nodo *aux = inicio;
         while (aux->siguiente != nullptr) {
             aux = aux->siguiente;
         }
@@ -72,7 +81,7 @@ void ListaReproduccion::agregarAlFinal(Cancion* cancion) {
 }
 
 void ListaReproduccion::mostrarListaReproduccion() {
-    if (inicio == nullptr) {
+    if (actual == nullptr) {
         cout << "Actual: Ninguna" << endl;
         cout << "Lista de reproduccion actual:" << endl;
         cout << "  Vacia" << endl;
@@ -81,10 +90,12 @@ void ListaReproduccion::mostrarListaReproduccion() {
         cout << "Ingrese Opcion: ";
         return;
     }
-    cout << "Actual: " << inicio->dato->getNombre() << " - " << inicio->dato->getArtista() << endl;
+
+    // Cambiamos 'inicio' por 'actual' para que refleje el estado real
+    cout << "Actual: " << actual->dato->getNombre() << " - " << actual->dato->getArtista() << endl;
     cout << "Lista de reproduccion actual:" << endl;
 
-    Nodo* cursor = inicio->siguiente;
+    Nodo *cursor = actual->siguiente;
 
     if (cursor == nullptr) {
         cout << "  Vacia" << endl;
@@ -97,19 +108,19 @@ void ListaReproduccion::mostrarListaReproduccion() {
         }
     }
     cout << "Opciones:" << endl;
-    if (inicio->siguiente != nullptr) {
+    if (actual->siguiente != nullptr) {
         cout << "  S<num> - Saltar a la cancion seleccionada" << endl;
     }
     cout << "  V - Volver al menu principal" << endl;
     cout << "Ingrese Opcion: ";
 }
 
-void ListaReproduccion::saltarACancion(int pos, Configuracion* c) {
-    if (inicio == nullptr || inicio->siguiente == nullptr) {
+void ListaReproduccion::saltarACancion(int pos, Configuracion *c) {
+    if (actual == nullptr || actual->siguiente == nullptr) {
         return;
     }
 
-    Nodo* cursor = inicio->siguiente;
+    Nodo *cursor = actual->siguiente;
     int i = 1;
 
     while (cursor != nullptr && i < pos) {
@@ -119,27 +130,16 @@ void ListaReproduccion::saltarACancion(int pos, Configuracion* c) {
 
     if (cursor == nullptr) return;
 
-    Nodo* temp = inicio;
-
-    while (temp != cursor) {
-        Nodo* eliminar = temp;
-        temp = temp->siguiente;
-        delete eliminar;
-    }
-
-    inicio = cursor;
-    inicio->anterior = nullptr;
-    actual = inicio;
+    actual = cursor;
 
     c->setIdCancionActual(actual->dato->getId());
     c->setPausa(false);
-
 }
 
-void ListaReproduccion::reproducirAltiro(Cancion* cancion, Configuracion* c) {
-    Nodo* aux = inicio;
+void ListaReproduccion::reproducirAltiro(Cancion *cancion, Configuracion *c) {
+    Nodo *aux = inicio;
     while (aux != nullptr) {
-        Nodo* temp = aux;
+        Nodo *temp = aux;
         aux = aux->siguiente;
         delete temp;
     }
@@ -149,20 +149,20 @@ void ListaReproduccion::reproducirAltiro(Cancion* cancion, Configuracion* c) {
     c->setIdCancionActual(actual->dato->getId());
 }
 
-void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion* c, Almacenamiento* alm) {
-    if (actual == nullptr){return;}
+void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacenamiento *alm) {
+    if (actual == nullptr) { return; }
 
-    if (modoRepe == 1) {return;}
+    if (modoRepe == 1) { return; }
 
     if (actual->siguiente == nullptr) {
         if (modoRepe == 2) {
             if (c->getRandom()) {
-                mezclarListaRepeticion(alm,c);
-            }else {
+                mezclarListaRepeticion(alm, c);
+            } else {
                 actual = inicio;
             }
             return;
-        }else {
+        } else {
             actual = nullptr;
             return;
         }
@@ -171,23 +171,23 @@ void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion* c, Almacen
 }
 
 
-void ListaReproduccion::mezclarListaRepeticion(Almacenamiento* alm, Configuracion* c) {
+void ListaReproduccion::mezclarListaRepeticion(Almacenamiento *alm, Configuracion *c) {
     int total = 0;
-    Nodo* aux = alm->getPrimerNodo();
+    Nodo *aux = alm->getPrimerNodo();
     while (aux != nullptr) {
         total++;
         aux = aux->siguiente;
     }
-    if (total == 0){return;}
+    if (total == 0) { return; }
 
     int idRandom = (rand() % total) + 1;
-    Cancion* elegida = alm->getCancionIndice((idRandom));
+    Cancion *elegida = alm->getCancionIndice((idRandom));
 
     if (elegida != nullptr) {
         agregarAlFinal(elegida);
-        for (int i = 1; i<= total; i++) {
+        for (int i = 1; i <= total; i++) {
             if (i != idRandom) {
-                Cancion* otra = alm->getCancionIndice(i);
+                Cancion *otra = alm->getCancionIndice(i);
                 if (otra != nullptr) {
                     agregarAlFinal(otra);
                 }
@@ -196,8 +196,4 @@ void ListaReproduccion::mezclarListaRepeticion(Almacenamiento* alm, Configuracio
     }
     actual = inicio;
     c->setIdCancionActual(actual->dato->getId());
-
-
 }
-
-

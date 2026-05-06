@@ -266,7 +266,6 @@ int main() {
                 break;
         }
     }
-
     delete listaAlmacenamiento;
     delete lista;
     return 0;

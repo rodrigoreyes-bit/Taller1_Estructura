@@ -14,7 +14,7 @@ Configuracion::Configuracion():
 }
 
 void Configuracion::cargarArchivoConfig() {
-    std::ifstream arch("status.cfg");
+    std::ifstream arch("data/status.cfg");
 
     if (!arch.is_open()) {
         std::cout << "No se encontro archivo status.cfg" << std::endl;
@@ -131,12 +131,22 @@ void Configuracion::setIdCancionActual(int id) {
     sobreescribirArchivoConfig();
 }
 
-int Configuracion::getIdCancionActual() { return idCancionActual;}
+int Configuracion::getIdCancionActual() {
+    return idCancionActual;
+}
 
-int Configuracion::getRepeticion() { return repeticion;}
+int Configuracion::getRepeticion() {
+    return repeticion;
+}
 
-bool Configuracion::getRandom() { return modoAleatorio;}
+bool Configuracion::getRandom() {
+    return modoAleatorio;
+}
 
-bool Configuracion::getPausa() { return estaPausado;}
+bool Configuracion::getPausa() {
+    return estaPausado;
+}
 
-nodoID* Configuracion::getListaPendientes() { return listaPendientes;}
+nodoID* Configuracion::getListaPendientes() {
+    return listaPendientes;
+}

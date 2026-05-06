@@ -15,7 +15,7 @@ Configuracion::Configuracion():
 
 
 void Configuracion::cargarArchivoConfig() {
-    std::ifstream arch("data/status.cfg");
+    std::ifstream arch("status.cfg");
 
     if (!arch.is_open()) {
         std::cout << "No se encontro archivo status.cfg" << std::endl;

@@ -14,3 +14,4 @@ add_executable(Taller1_Estructura
         src/classes/Configuracion.cpp
 )
 target_include_directories(Taller1_Estructura PRIVATE include)
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/data" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")

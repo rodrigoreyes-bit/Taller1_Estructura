@@ -8,7 +8,7 @@
 using namespace std;
 
 void lecturaCanciones(Almacenamiento *a) {
-    ifstream archivo("music_source.txt");
+    ifstream archivo("data/music_source.txt");
     string linea;
 
     if (!archivo.is_open()) {

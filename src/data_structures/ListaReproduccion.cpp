@@ -171,9 +171,9 @@ void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacen
 }
 
 
-void ListaReproduccion::mezclarListaRepeticion(Almacenamiento *alm, Configuracion *c) {
+void ListaReproduccion::mezclarListaRepeticion(Almacenamiento* alm, ListaReproduccion* lr, Configuracion *c) {
     int total = 0;
-    Nodo *aux = alm->getPrimerNodo();
+    Nodo *aux = lr->inicio;
     while (aux != nullptr) {
         total++;
         aux = aux->siguiente;
@@ -181,7 +181,7 @@ void ListaReproduccion::mezclarListaRepeticion(Almacenamiento *alm, Configuracio
     if (total == 0) { return; }
 
     int idRandom = (rand() % total) + 1;
-    Cancion *elegida = alm->getCancionIndice((idRandom));
+    Cancion *elegida = alm->getCancionIndice(idRandom);
 
     if (elegida != nullptr) {
         agregarAlFinal(elegida);

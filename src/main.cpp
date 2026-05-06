@@ -5,6 +5,7 @@
 #include "../include/classes/Almacenamiento.hpp"
 #include "../include/data_structures/ListaReproduccion.hpp"
 #include "../include/classes/Configuracion.hpp"
+
 using namespace std;
 
 void lecturaCanciones(Almacenamiento *a) {
@@ -70,7 +71,6 @@ void ejecutarmenuL(Almacenamiento *alm, Configuracion *c, ListaReproduccion *lr,
     bool volver = false;
 
     while (volver == false) {
-        clearScreen();
 
         Nodo *cursor = alm->getPrimerNodo();
         int i = 1;
@@ -200,7 +200,18 @@ int main() {
     int anioActual = 0;
 
     while (salir == false) {
-        clearScreen();
+        Cancion* c = lista->getCancionActual();
+        if (c != nullptr) {
+            cancionActual = c->getNombre();
+            artistaActual = c->getArtista();
+            albumActual = c->getAlbum();
+            anioActual = c->getAnio();
+        } else {
+            cancionActual = "Ninguna";
+            artistaActual = "Desconocido";
+            albumActual = "Ninguno";
+            anioActual = 0;
+        }
         menuOpciones(config1, cancionActual, artistaActual, albumActual, anioActual);
 
         cin >> entradaMenu;
@@ -234,6 +245,8 @@ int main() {
                 break;
 
             case 'S': {
+
+
             }
             break;
             case 'R': {
@@ -246,7 +259,6 @@ int main() {
             case 'A': {
                 string input;
                 do {
-                    clearScreen();
                     lista->mostrarListaReproduccion();
                     cin >> input;
 

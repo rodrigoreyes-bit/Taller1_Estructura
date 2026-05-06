@@ -2,7 +2,7 @@
 #include "../../include/data_structures/ListaReproduccion.hpp"
 #include <iostream>
 #include "../../include/classes/Configuracion.hpp"
-//using namespace std;
+using namespace std;
 
 ListaReproduccion::ListaReproduccion() {
     this->inicio = nullptr;

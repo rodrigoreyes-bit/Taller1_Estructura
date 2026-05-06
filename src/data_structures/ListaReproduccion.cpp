@@ -2,7 +2,7 @@
 #include "../../include/data_structures/ListaReproduccion.hpp"
 #include <iostream>
 #include "../../include/classes/Configuracion.hpp"
-//using namespace std;
+using namespace std;
 
 ListaReproduccion::ListaReproduccion() {
     this->inicio = nullptr;
@@ -38,42 +38,22 @@ void ListaReproduccion::pistaSiguiente(Almacenamiento *alm, Configuracion* c) {
     if (actual == nullptr) {
         return;
     }
+
     if (actual->siguiente != nullptr) {
         actual = actual->siguiente;
         c->setPausa(false);
         c->setIdCancionActual(actual->dato->getId());
-
-    } else {
-        //se obtienen el total de canciones del almacenamientoo
-        int total = 0;
-        Nodo* aux = alm->getPrimerNodo();
-        while (aux != nullptr) {
-            total++;
-            aux = aux->siguiente;
-        }
-
-        if (total == 0) return;
-        //en el caso de q este en aleatorio se randomizan las canciones
-        int indiceAleatorio = (rand() % total) + 1;
-        Cancion* elegida = alm->getCancionIndice(indiceAleatorio);
-
-        if (elegida != nullptr) {
-            agregarAlFinal(elegida);
-            actual = actual->siguiente;
+    }
+    else {
+        if (c->getRepeticion() == 2) {
+            actual = inicio; // Hacemos un bucle volviendo a la primera canción de la cola
             c->setPausa(false);
             c->setIdCancionActual(actual->dato->getId());
-            //dps de la cancion, tambien se agregan las canciones que estaban de forma aleatoria a la cola
-            for (int i = 1; i <= total; i++) {
-                if (i != indiceAleatorio) {
-                    Cancion* otra = alm->getCancionIndice(i);
-                    if (otra != nullptr) {
-                        agregarAlFinal(otra);
-                    }
-                }
-            }
+        }
+        else {
+            c->setPausa(true);
         }
     }
-
 }
 
 void ListaReproduccion::agregarAlFinal(Cancion* cancion) {

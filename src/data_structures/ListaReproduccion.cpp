@@ -37,7 +37,7 @@ void ListaReproduccion::pistaSiguiente(Configuracion *c) {
             c->setPausa(false);
             c->setIdCancionActual(actual->dato->getId());
         } else {
-            c->setPausa(true); // Termina la lista
+            c->setPausa(true);
         }
     }
 }
@@ -52,7 +52,6 @@ void ListaReproduccion::pistaAnterior(Configuracion *c) {
         c->setIdCancionActual(actual->dato->getId());
         c->setPausa(false);
     } else {
-        // Si estamos en la primera y hay repetición, saltamos al final
         if (c->getRepeticion() == 2) {
             Nodo *aux = actual;
             while (aux->siguiente != nullptr) {
@@ -91,7 +90,6 @@ void ListaReproduccion::mostrarListaReproduccion() {
         return;
     }
 
-    // Cambiamos 'inicio' por 'actual' para que refleje el estado real
     cout << "Actual: " << actual->dato->getNombre() << " - " << actual->dato->getArtista() << endl;
     cout << "Lista de reproduccion actual:" << endl;
 

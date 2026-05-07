@@ -229,7 +229,13 @@ int main() {
                 break;
 
             case 'S': {
-                config1->setRandom(true); //esto setea como true en el cfg
+                //Revisar esto porfa
+                bool nuevoEstado = !config1->getRandom();
+                config1->setRandom(nuevoEstado);
+
+                if (nuevoEstado) {
+                    lista->mezclarCola();
+                }
             }
             break;
             case 'R': {

@@ -18,7 +18,7 @@ public:
     void pistaAnterior(Configuracion* c); //Q
     void pistaSiguiente(Configuracion* c, Almacenamiento* alm); //E
     void generarListaAleatoria(Almacenamiento* alm, Configuracion* c); //E
-
+    void mezclarCola();
     void agregarAlFinal(Cancion* cancion);
     void mostrarListaReproduccion(); //A
     void saltarACancion(int pos, Configuracion* c); //A

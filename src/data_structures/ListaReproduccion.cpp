@@ -22,28 +22,32 @@ void ListaReproduccion::cambiarEstadoReproduccion(Configuracion *c) {
     c->setPausa(!c->getPausa());
 }
 
-void ListaReproduccion::pistaSiguiente(Configuracion* c, Almacenamiento* alm) {
+void ListaReproduccion::pistaSiguiente(Configuracion *c, Almacenamiento *alm) {
     if (actual == nullptr) {
         return;
     }
-    if (c->getRepeticion() == 1) { //si solo repite 1 cancion, la pista sig no cambia c:
+    if (c->getRepeticion() == 1) {
+        //si solo repite 1 cancion, la pista sig no cambia c:
         c->setPausa(false);
         return;
     }
-    if (actual->siguiente != nullptr) { //aca, si no esta en repeticion de 1 cancion y todavia tiene canciones
-        actual = actual->siguiente;     //en la cola, pone la pista siguiente
+    if (actual->siguiente != nullptr) {
+        //aca, si no esta en repeticion de 1 cancion y todavia tiene canciones
+        actual = actual->siguiente; //en la cola, pone la pista siguiente
         c->setPausa(false);
         c->setIdCancionActual(actual->dato->getId());
-
     } else {
-        if (c->getRepeticion() == 2) { //si esta en modo repetir todas (2) y se termino la lista
-            if (c->getRandom()) { //en el caso de q este random, genera una nueva lista aleatoria
+        if (c->getRepeticion() == 2) {
+            //si esta en modo repetir todas (2) y se termino la lista
+            if (c->getRandom()) {
+                //en el caso de q este random, genera una nueva lista aleatoria
                 generarListaAleatoria(alm, c);
-            } else { //en el caso de q no este random, vuelve al inicio
+            } else {
+                //en el caso de q no este random, vuelve al inicio
                 actual = inicio;
             }
-
-        } else { //si no hay repeticion y se acaba la lista, se genera una nueva lista aleatoria c:
+        } else {
+            //si no hay repeticion y se acaba la lista, se genera una nueva lista aleatoria c:
             generarListaAleatoria(alm, c);
         }
 
@@ -55,9 +59,9 @@ void ListaReproduccion::pistaSiguiente(Configuracion* c, Almacenamiento* alm) {
 }
 
 void ListaReproduccion::generarListaAleatoria(Almacenamiento *alm, Configuracion *c) {
-     Nodo* aux = inicio; //esto es para limpiar la lista actual c:
+    Nodo *aux = inicio; //esto es para limpiar la lista actual c:
     while (aux != nullptr) {
-        Nodo* temp = aux;
+        Nodo *temp = aux;
         aux = aux->siguiente;
         delete temp;
     }
@@ -67,7 +71,7 @@ void ListaReproduccion::generarListaAleatoria(Almacenamiento *alm, Configuracion
 
     int cantCanciones = 0;
 
-    Nodo* canciones = alm->getPrimerNodo();
+    Nodo *canciones = alm->getPrimerNodo();
     while (canciones != nullptr) {
         cantCanciones++;
         canciones = canciones->siguiente;
@@ -78,7 +82,7 @@ void ListaReproduccion::generarListaAleatoria(Almacenamiento *alm, Configuracion
     }
 
     //esto lo tuve q buscar, hay q probarlo
-    int* listaMezcla = new int[cantCanciones];
+    int *listaMezcla = new int[cantCanciones];
     canciones = alm->getPrimerNodo();
     for (int i = 0; i < cantCanciones; i++) {
         listaMezcla[i] = canciones->dato->getId();
@@ -93,9 +97,9 @@ void ListaReproduccion::generarListaAleatoria(Almacenamiento *alm, Configuracion
     }
 
     for (int i = 0; i < cantCanciones; i++) {
-        Nodo* buscador = alm->getPrimerNodo();
-        while(buscador != nullptr){
-            if(buscador->dato->getId() == listaMezcla[i]){
+        Nodo *buscador = alm->getPrimerNodo();
+        while (buscador != nullptr) {
+            if (buscador->dato->getId() == listaMezcla[i]) {
                 agregarAlFinal(buscador->dato);
                 break;
             }
@@ -126,7 +130,6 @@ void ListaReproduccion::pistaAnterior(Configuracion *c) {
         actual = actual->anterior;
         c->setIdCancionActual(actual->dato->getId());
         c->setPausa(false);
-
     } else {
         if (c->getRepeticion() == 2) {
             Nodo *aux = actual;
@@ -192,7 +195,7 @@ void ListaReproduccion::saltarACancion(int pos, Configuracion *c) {
     if (actual == nullptr || actual->siguiente == nullptr || pos <= 0) {
         return;
     }
-    Nodo* cursor = actual->siguiente;
+    Nodo *cursor = actual->siguiente;
     int cont = 1;
 
     while (cursor != nullptr && cont < pos) {
@@ -245,7 +248,7 @@ void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacen
     actual = actual->siguiente;
 }
 
-void ListaReproduccion::mezclarListaRepeticion(Almacenamiento* alm, ListaReproduccion* lr, Configuracion *c) {
+void ListaReproduccion::mezclarListaRepeticion(Almacenamiento *alm, ListaReproduccion *lr, Configuracion *c) {
     int total = 0;
     Nodo *aux = lr->inicio;
     while (aux != nullptr) {
@@ -270,4 +273,39 @@ void ListaReproduccion::mezclarListaRepeticion(Almacenamiento* alm, ListaReprodu
     }
     actual = inicio;
     c->setIdCancionActual(actual->dato->getId());
+}
+
+void ListaReproduccion::mezclarCola() {
+    if (actual == nullptr || actual->siguiente == nullptr) {
+        return;
+    }
+
+    int count = 0;
+    Nodo *cursor = actual->siguiente;
+    while (cursor != nullptr) {
+        count++;
+        cursor = cursor->siguiente;
+    }
+
+    Cancion **canciones = new Cancion *[count];
+    cursor = actual->siguiente;
+    for (int i = 0; i < count; i++) {
+        canciones[i] = cursor->dato;
+        cursor = cursor->siguiente;
+    }
+
+    for (int i = count - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        Cancion *temp = canciones[i];
+        canciones[i] = canciones[j];
+        canciones[j] = temp;
+    }
+
+    cursor = actual->siguiente;
+    for (int i = 0; i < count; i++) {
+        cursor->dato = canciones[i];
+        cursor = cursor->siguiente;
+    }
+
+    delete[] canciones;
 }

@@ -19,12 +19,12 @@ Aparato reproductor es un reproductor de música basado en consola desarrollado 
 * Para compilar este proyecto, se requiere un compilador de C++ (GCC/G++) instalado en su sistema.
 * Desde la raíz del proyecto (donde se encuentra el archivo `main.cpp`) ejecutar el programa
 
-* **Nota:** Si se compila en CLion o VSCode, el programa requiere que la carpeta data/ esté presente en el mismo Working Directory para cargar correctamente `music_source.txt` y `status.cfg`.
-Para cambiar el **Working Directory** se tiene que:
-1.- Ir a *Run/Debug Configurations*.
+* **Nota IMPORTANTE:** Si se compila en CLion o VSCode, el programa requiere que la carpeta data/ esté presente en el mismo **Working Directory** para cargar correctamente `music_source.txt` y `status.cfg`.
+Para cambiar el **Working Directory** en CLion se tiene que:
+1.- Ir a *Run*, click derecho y clickear *Edit Configurations..*.
 2.- Seleccionar *Working Directory*.
-3.- Hacer click en el icono de la carpeta y seleccionar la carpeta raíz del proyecto *"Taller1_Estructura"*.
-4.- Apply y OK.
+3.- Hacer click en el icono de la carpeta y seleccionar la *carpeta* raíz del proyecto *"Taller1_Estructura"*.
+4.- Apply y OK!!.
 
 ## Funcionamiento del programa
 Al iniciar, el programa carga los datos desde la carpeta data/. El usuario dispone de las siguientes opciones principales en el menú:  

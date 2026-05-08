@@ -1,4 +1,4 @@
-# Snoopify ❨･¨⬮                                                                       ![Snoopy escuchando música](image_7048c3.png)
+# Snoopify ❨･¨⬮                                                                      
 
 **Desarrollado por:**
 * Ninibeth Pérez Cortés - papaFritaUwU

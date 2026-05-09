@@ -27,7 +27,6 @@ void ListaReproduccion::pistaSiguiente(Configuracion *c, Almacenamiento *alm) {
         return;
     }
     if (c->getRepeticion() == 1) {
-        //si solo repite 1 cancion, la pista sig no cambia c:
         c->setPausa(false);
         return;
     }

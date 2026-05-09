@@ -24,12 +24,12 @@ class Configuracion {
         void cargarArchivoConfig();
         void sobreescribirArchivoConfig();
         void insertarIdPendientes(int id, bool guardar = true);
-        //setters
+
         void setPausa(bool estado);
         void setRandom(bool estadoR);
         void setRepeticion(int modoRep);
         void setIdCancionActual(int id);
-        //getters
+
         int getIdCancionActual();
         int getRepeticion();
         bool getRandom();

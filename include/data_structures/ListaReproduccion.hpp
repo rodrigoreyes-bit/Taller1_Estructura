@@ -14,17 +14,17 @@ public:
     ListaReproduccion();
 
     Cancion* getCancionActual();
-    void cambiarEstadoReproduccion(Configuracion* c); //W
-    void pistaAnterior(Configuracion* c); //Q
-    void pistaSiguiente(Configuracion* c, Almacenamiento* alm); //E
-    void generarListaAleatoria(Almacenamiento* alm, Configuracion* c); //E
+    void cambiarEstadoReproduccion(Configuracion* c);
+    void pistaAnterior(Configuracion* c);
+    void pistaSiguiente(Configuracion* c, Almacenamiento* alm);
+    void generarListaAleatoria(Almacenamiento* alm, Configuracion* c);
     void mezclarCola();
     void agregarAlFinal(Cancion* cancion);
-    void mostrarListaReproduccion(); //A
-    void saltarACancion(int pos, Configuracion* c); //A
-    void reproducirAltiro(Cancion* cancion, Configuracion* c); //A
-    void repetirCanciones(int modoRepe, Configuracion* c, Almacenamiento* alm, ListaReproduccion* lista); //r
-    void mezclarListaRepeticion(Almacenamiento* alm, ListaReproduccion* lr, Configuracion* c); // r y s
+    void mostrarListaReproduccion();
+    void saltarACancion(int pos, Configuracion* c);
+    void reproducirAltiro(Cancion* cancion, Configuracion* c);
+    void repetirCanciones(int modoRepe, Configuracion* c, Almacenamiento* alm, ListaReproduccion* lista);
+    void mezclarListaRepeticion(Almacenamiento* alm, ListaReproduccion* lr, Configuracion* c);
 
 
 };

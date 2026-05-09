@@ -78,7 +78,6 @@ bool Almacenamiento::existeID(int id) {
     return false;
 }
 void Almacenamiento::guardarEnArchivo() {
-    //borra el archivo original
     ofstream archivo("music_source.txt", ios::trunc);
     if (!archivo.is_open()) return;
 

@@ -43,7 +43,6 @@ void ListaReproduccion::pistaSiguiente(Configuracion *c, Almacenamiento *alm) {
                 actual = inicio;
             }
         } else {
-            //si no hay repeticion y se acaba la lista, se genera una nueva lista aleatoria c:
             generarListaAleatoria(alm, c);
         }
 
@@ -55,7 +54,7 @@ void ListaReproduccion::pistaSiguiente(Configuracion *c, Almacenamiento *alm) {
 }
 
 void ListaReproduccion::generarListaAleatoria(Almacenamiento *alm, Configuracion *c) {
-    Nodo *aux = inicio; //esto es para limpiar la lista actual c:
+    Nodo *aux = inicio;
     while (aux != nullptr) {
         Nodo *temp = aux;
         aux = aux->siguiente;
@@ -77,7 +76,6 @@ void ListaReproduccion::generarListaAleatoria(Almacenamiento *alm, Configuracion
         return;
     }
 
-    //esto lo tuve q buscar, hay q probarlo
     int *listaMezcla = new int[cantCanciones];
     canciones = alm->getPrimerNodo();
     for (int i = 0; i < cantCanciones; i++) {
@@ -246,12 +244,20 @@ void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacen
 
 void ListaReproduccion::mezclarListaRepeticion(Almacenamiento *alm, ListaReproduccion *lr, Configuracion *c) {
     int total = 0;
-    Nodo *aux = lr->inicio;
+    Nodo *aux = inicio;
     while (aux != nullptr) {
         total++;
         aux = aux->siguiente;
     }
     if (total == 0) { return; }
+
+    Nodo* temp = inicio;
+    while (temp != nullptr) {
+        Nodo* sig = temp-> siguiente;
+        delete temp;
+        temp = sig;
+    }
+    inicio = nullptr;
 
     int idRandom = (rand() % total) + 1;
     Cancion *elegida = alm->getCancionIndice(idRandom);

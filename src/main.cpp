@@ -229,7 +229,6 @@ int main() {
                 break;
 
             case 'S': {
-                //Revisar esto porfa
                 bool nuevoEstado = !config1->getRandom();
                 config1->setRandom(nuevoEstado);
 
@@ -239,6 +238,7 @@ int main() {
             }
             break;
             case 'R': {
+                cout << "Ingrese Opción (0, 1 o 2): ";
                 int eleccion;
                 cin >> eleccion;
                 config1->setRepeticion(eleccion);

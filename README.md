@@ -6,7 +6,7 @@
 * Josefa Vargas Cortés - josefa-v
 
 ## Descripción del Proyecto
-Aparato reproductor es un reproductor de música basado en consola desarrollado en C++ para el curso de Estructuras de Datos. El sistema permite gestionar un catálogo de música desde un archivo fuente y controlar una lista de reproducción dinámica. Utiliza estructuras de datos personalizadas, como listas doblemente enlazadas, para ofrecer una navegación fluida entre canciones, permitiendo reproducir, pausar y gestionar colas de reproducción de forma eficiente.
+Snoopify es un reproductor de música basado en consola desarrollado en C++ para el curso de Estructuras de Datos. El sistema permite gestionar un catálogo de música desde un archivo fuente y controlar una lista de reproducción dinámica. Utiliza estructuras de datos personalizadas, como listas doblemente enlazadas, para ofrecer una navegación fluida entre canciones, permitiendo reproducir, pausar y gestionar colas de reproducción de forma eficiente.
 
 ## Diagrama de Clases
 * **Cancion:** Almacena los metadatos (ID, nombre, artista, duración, etc.).

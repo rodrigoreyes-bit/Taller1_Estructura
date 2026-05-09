@@ -23,7 +23,7 @@ public:
     void mostrarListaReproduccion(); //A
     void saltarACancion(int pos, Configuracion* c); //A
     void reproducirAltiro(Cancion* cancion, Configuracion* c); //A
-    void repetirCanciones(int modoRepe, Configuracion* c, Almacenamiento* alm); //r
+    void repetirCanciones(int modoRepe, Configuracion* c, Almacenamiento* alm, ListaReproduccion* lista); //r
     void mezclarListaRepeticion(Almacenamiento* alm, ListaReproduccion* lr, Configuracion* c); // r y s
 
 

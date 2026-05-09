@@ -32,18 +32,14 @@ void ListaReproduccion::pistaSiguiente(Configuracion *c, Almacenamiento *alm) {
         return;
     }
     if (actual->siguiente != nullptr) {
-        //aca, si no esta en repeticion de 1 cancion y todavia tiene canciones
-        actual = actual->siguiente; //en la cola, pone la pista siguiente
+        actual = actual->siguiente;
         c->setPausa(false);
         c->setIdCancionActual(actual->dato->getId());
     } else {
         if (c->getRepeticion() == 2) {
-            //si esta en modo repetir todas (2) y se termino la lista
             if (c->getRandom()) {
-                //en el caso de q este random, genera una nueva lista aleatoria
                 generarListaAleatoria(alm, c);
             } else {
-                //en el caso de q no este random, vuelve al inicio
                 actual = inicio;
             }
         } else {
@@ -224,7 +220,7 @@ void ListaReproduccion::reproducirAltiro(Cancion *cancion, Configuracion *c) {
     c->setIdCancionActual(actual->dato->getId());
 }
 
-void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacenamiento *alm) {
+void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacenamiento *alm, ListaReproduccion* lista) {
     if (actual == nullptr) {
         return;
     }
@@ -235,7 +231,7 @@ void ListaReproduccion::repetirCanciones(int modoRepe, Configuracion *c, Almacen
     if (actual->siguiente == nullptr) {
         if (modoRepe == 2) {
             if (c->getRandom()) {
-                //mezclarListaRepeticion(alm, c); //ARREGLAR ESTA FUNCIOOOOON
+                mezclarListaRepeticion(alm,lista, c);
             } else {
                 actual = inicio;
             }
